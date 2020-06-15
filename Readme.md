@@ -1,6 +1,6 @@
 # Campus Parking
 
 ### by Team 3
- Xizi Chen
+ Xizi Chen\
  add your name
 
