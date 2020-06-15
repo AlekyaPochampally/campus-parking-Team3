@@ -1,4 +1,4 @@
 # Campus Parking
 
-### byTeam 3
+### by Team 3
 
