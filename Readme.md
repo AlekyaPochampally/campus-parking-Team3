@@ -1,5 +1,7 @@
 # Campus Parking
 
+For UI pages 
+Source code -> lib -> ui/pages
 ### By Team 3
  - Xizi Chen
  - Kudaravalli Chetan
