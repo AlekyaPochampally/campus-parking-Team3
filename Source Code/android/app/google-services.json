@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "800840588825",
+    "firebase_url": "https://car-parking-a9a8f.firebaseio.com",
+    "project_id": "car-parking-a9a8f",
+    "storage_bucket": "car-parking-a9a8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800840588825:android:353f7adce27fe8795d5488",
+        "android_client_info": {
+          "package_name": "edu.nwmissouri.mobile.carparking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "800840588825-mlt30h368dvt086u93m9vm3659625hol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuPksJ92TXMrgCeXUt22JAHQVX0wmuRTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "800840588825-mlt30h368dvt086u93m9vm3659625hol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
