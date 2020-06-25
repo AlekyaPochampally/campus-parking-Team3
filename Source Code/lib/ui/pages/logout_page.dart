@@ -30,4 +30,33 @@ class Logout extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                   child: Text(
                     'Logout',
-                    
+                  style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                Container(alignment: Alignment.center,
+                padding: EdgeInsets.all(10),
+                  child: Text(
+                    'Thank you for using our application\n\n',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                 Container(alignment: Alignment.center,
+                 padding: EdgeInsets.all(10),
+                height: 200.0,
+      width: 120.0,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(
+              'assets/images/logout.jpg'),
+          fit: BoxFit.fill,
+        ),
+        shape: BoxShape.circle,
+      ),
+                 )
+        ],
+    )))
+    
+    
+    )));
+  }
+}
