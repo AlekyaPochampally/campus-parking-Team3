@@ -12,22 +12,17 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
- @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
-
- 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
   }
 
- 
-
-
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
