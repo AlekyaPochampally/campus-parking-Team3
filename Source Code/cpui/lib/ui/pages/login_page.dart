@@ -1,45 +1,37 @@
-import 'package:carparking/authentication/base_authentication.dart';
-import 'package:carparking/ui/pages/forgot_password_page.dart';
-import 'package:carparking/ui/pages/signup_page.dart';
+import 'package:cpui/beans/requests/authenticate_user_request.dart';
+import 'package:cpui/services/user_services.dart';
+import 'package:cpui/ui/pages/signup_page.dart';
+import 'package:cpui/ui/pages/user_home_page.dart';
+import 'package:cpui/ui/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'forgot_password_page.dart';
 
 class LoginPage extends StatefulWidget {
   static const String route = '/login';
-
-  final BaseAuthentication baseAuthentication;
-
-  final VoidCallback loginCallback;
-
-  LoginPage({this.baseAuthentication, this.loginCallback});
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage>
-    with SingleTickerProviderStateMixin {
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+
+  UserServices _userServices = UserServices();
+
   String _email;
   String _password;
-
-  AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Campus Parking")),
+        appBar: ApplicationBar(),
         body: SafeArea(
             child: Form(
           key: _formKey,
@@ -73,7 +65,16 @@ class _LoginPageState extends State<LoginPage>
                       border: OutlineInputBorder(),
                       labelText: 'Email Id',
                     ),
-                    onSaved: (value) => _email = value.trim(),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Provide an email id';
+                      }
+                      _formKey.currentState.save();
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _email = value;
+                    },
                   ),
                 ),
 
@@ -86,7 +87,16 @@ class _LoginPageState extends State<LoginPage>
                       border: OutlineInputBorder(),
                       labelText: 'Password',
                     ),
-                    onSaved: (value) => _password = value.trim(),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Provide your password';
+                      }
+                      _formKey.currentState.save();
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _password = value;
+                    },
                   ),
                 ),
 
@@ -95,8 +105,18 @@ class _LoginPageState extends State<LoginPage>
                   height: 55,
                   padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: RaisedButton(
-                    onPressed: () async => {
-                      await widget.baseAuthentication.signIn(_email, _password)
+                    onPressed: () async {
+                      if (_formKey.currentState.validate()) {
+                        _formKey.currentState.save();
+                        var authenticateUserRequest = AuthenticateUserRequest(emailId: _email, password: _password);
+                        final result =
+                            await _userServices.authenticate(authenticateUserRequest);
+                        if (result != null) {
+                          var sharedPreference = await SharedPreferences.getInstance();
+                          sharedPreference.setString('cp_token', result.token);
+                          Navigator.of(context).pushReplacementNamed(UserHomePage.route);
+                        }
+                      }
                     },
                     child: Text(
                       'Login',
