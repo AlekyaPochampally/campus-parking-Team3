@@ -1,3 +1,4 @@
+import 'package:cpui/ui/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
 class ChangePasswordPage extends StatefulWidget {
@@ -11,7 +12,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Campus Parking')),
+      appBar: ApplicationBar(),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(10),
