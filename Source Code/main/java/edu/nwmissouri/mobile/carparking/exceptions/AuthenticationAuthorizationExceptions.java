@@ -13,6 +13,7 @@ public class AuthenticationAuthorizationExceptions {
         public TokenExpiredException(User user, String message) {
             super(message);
             this.user = user;
+// user 
         }
 
     }
