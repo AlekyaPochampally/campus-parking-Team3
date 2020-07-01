@@ -1,5 +1,0 @@
-enum AuthenticationStatus {
-  INDETERMINATE,
-  NOT_AUTHENTICATED,
-  AUTHENTICATED
-}

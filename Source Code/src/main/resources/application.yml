@@ -1,0 +1,45 @@
+cp:
+  security:
+    jwt:
+      token:
+        secret-key: secret-key
+        expire-length: 300000
+  thread-pool:
+    pool-size: 3
+    max-pool-size: 5
+    queue-capacity: 100
+    thread-name-prefix: cp-async-
+  tokens:
+    timeouts:
+      # 3 Days # NOT_USED_YET_IN_CODE
+      email-verification: 259200000
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+          - health
+          - httptrace
+spring:
+  datasource:
+    username: cp-user
+    password: cp-pa@ssw01_d_1est
+    url: jdbc:mysql://localhost:3306/cp-db
+  jpa:
+    # properties:
+    #   hibernate:
+    #     dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: edu.nwmissouri.mobile.carparking.configurations.ApplicationTableNamingStrategy
+  mail:
+    host: smtp.Office365.com
+    port: 587
+    username: s53
+    password: 
+
+logging:
+  level:
+    root: DEBUG
