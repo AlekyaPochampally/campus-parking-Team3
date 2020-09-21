@@ -184,6 +184,66 @@ void getCurrentUser() async{
                 )
               ]),
         ),
+		drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: <Color>[
+                    Colors.black54,
+                    Colors.blueGrey[500]
+                  ])),
+                  child: Container(
+                    child: Column(
+                      children: <Widget>[
+                        Material(
+                          borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                          child: Image.asset(
+                            'assets/images/nwm_logo.png',
+                            width: 100,
+                            height: 100,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(0.01),
+                          child: Text(
+                            'Northwest missouri state univeristy',
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 15.0),
+                          ),
+                        )
+                      ],
+                    ),
+                  )),
+              CustomeListTile(Icons.person, 'Profile',
+                  () => {Navigator.of(context).pushNamed(profilePage.route)}),
+              CustomeListTile(Icons.map, 'Map',  () => {Navigator.of(context).pushNamed(mapPage.route)}), //mapPage
+              CustomeListTile(Icons.report, 'Report', () => {Navigator.of(context).pushNamed(reportPage.route)}),
+              CustomeListTile(Icons.question_answer, 'FAQ', () => {}),
+              CustomeListTile(Icons.chat, 'Live Chat', () => {Navigator.of(context).pushNamed(ChatScreen.route)}),
+              CustomeListTile(Icons.phone, 'Contact', () => {Navigator.of(context).pushNamed(ContactUs.route)}),
+              CustomeListTile(Icons.gavel, 'Ticket', () => {Navigator.of(context).pushNamed(ticket.route)}),
+              CustomeListTile(Icons.lock, 'Logout',() async {
+                  final user = await _auth.signOut();
+                  Navigator.of(context).pushNamed(LoginPage.route);
+              }),
+                 // () => {Navigator.of(context).pushNamed(LoginPage.route)}),
+
+//              onPressed: () async {
+//                try {
+//                  print(_email);
+//                  print(_password);
+//                  final user = await _auth.signInWithEmailAndPassword(
+//                      email: _email, password: _password);
+//                  if (user != null)
+//                    Navigator.pushNamed(context,UserHomePage.route);
+//                } catch (e) {
+//                  print(e);
+//                }
+//              }
+            ],
+          )
         );
   }
 }
