@@ -212,14 +212,14 @@ void getCurrentUser() async{
                       ],
                     ),
                   )),
-              // CustomeListTile(Icons.person, 'Profile',
-              //     () => {Navigator.of(context).pushNamed(profilePage.route)}),
-              // CustomeListTile(Icons.map, 'Map',  () => {Navigator.of(context).pushNamed(mapPage.route)}), //mapPage
-              CustomeListTile(Icons.report, 'Report', () => {Navigator.of(context).pushNamed(reportPage.route)}),
-              // CustomeListTile(Icons.question_answer, 'FAQ', () => {}),
-              // CustomeListTile(Icons.chat, 'Live Chat', () => {Navigator.of(context).pushNamed(ChatScreen.route)}),
-              // CustomeListTile(Icons.phone, 'Contact', () => {Navigator.of(context).pushNamed(ContactUs.route)}),
-              // CustomeListTile(Icons.gavel, 'Ticket', () => {Navigator.of(context).pushNamed(ticket.route)}),
+              CustomeListTile(Icons.person, 'Profile',
+                  () => {}),
+              CustomeListTile(Icons.map, 'Map',  () =>{}), //mapPage
+              CustomeListTile(Icons.report, 'Report', () => {}), //Navigator.of(context).pushNamed(reportPage.route)}),
+              CustomeListTile(Icons.question_answer, 'FAQ', () => {}),
+              CustomeListTile(Icons.chat, 'Live Chat', () => {}),
+              CustomeListTile(Icons.phone, 'Contact', () => {}),
+              CustomeListTile(Icons.gavel, 'Ticket', () => {}),
               CustomeListTile(Icons.lock, 'Logout',() async {
                   final user = await _auth.signOut();
                   Navigator.of(context).pushNamed(LoginPage.route);

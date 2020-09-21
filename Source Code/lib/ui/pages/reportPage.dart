@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:campusparking/ui/widgets/app_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:campusparking/ui/pages/user_home_page.dart';
-import 'package:campusparking/ui/pages/violationPage.dart';
+//import 'package:campusparking/ui/pages/violationPage.dart';
 
 final _firestore = Firestore.instance;
 
@@ -261,8 +261,8 @@ class _reportPageState extends State<reportPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           FlatButton(
-                              onPressed: () async => Navigator.of(context)
-                                  .pushReplacementNamed(ViolationPage.route),
+                              // onPressed: () async => Navigator.of(context)
+                              //     .pushReplacementNamed(ViolationPage.route),
                               child: Text(
                                 'Click here to report a violation !',
                               )),
