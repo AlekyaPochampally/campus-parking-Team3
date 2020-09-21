@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "716242272901",
+    "firebase_url": "https://campus-parking-e2a4b.firebaseio.com",
+    "project_id": "campus-parking-e2a4b",
+    "storage_bucket": "campus-parking-e2a4b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716242272901:android:710d625f061b57f6379fec",
+        "android_client_info": {
+          "package_name": "com.nwmsu.campusparking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716242272901-m41vi9jm07pgbk1r3rntj2ir5ui9ecbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBarksGkMthMxuV-SKbT3aY_qLy3DPp3uc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716242272901-m41vi9jm07pgbk1r3rntj2ir5ui9ecbl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
