@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:campusparking/ui/pages/profile_page.dart';
-//import 'package:campusparking/ui/pages/map_page.dart';
+import 'package:campusparking/ui/pages/map_page.dart';
 // import 'package:campusparking/ui/pages/ticket_page.dart';
 //import 'Parking.dart';
 import 'chat_screen.dart';
@@ -17,42 +17,36 @@ final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
 
 class UserHomePage extends StatefulWidget {
-
   static const String route = '/user-home';
-  static  String Lot_name;
-  static int available=00;
+  static String Lot_name;
+  static int available = 00;
   @override
   _UserHomePageState createState() => _UserHomePageState();
 }
-
 
 class _UserHomePageState extends State<UserHomePage> {
   //static  int Lot_ID;
   final _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
 
-
   @override
   void initState() {
     super.initState();
     getCurrentUser();
-
-
   }
 
-void getCurrentUser() async{
-    try{
+  void getCurrentUser() async {
+    try {
       final user = await _auth.currentUser();
-      if(user != null)
-        loggedInUser = user;
+      if (user != null) loggedInUser = user;
       print(loggedInUser.email);
-    }catch(e){
+    } catch (e) {
       print(e);
     }
-}
+  }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: ApplicationBar(),
         body: SafeArea(
@@ -88,7 +82,7 @@ void getCurrentUser() async{
                               splashColor: Colors.grey,
                               color: Colors.blueGrey,
                               onPressed: () async {
-                                UserHomePage.Lot_name='PA1';
+                                UserHomePage.Lot_name = 'PA1';
                                 // Navigator.of(context).pushReplacementNamed(Parking.route);
                               },
                               child: Text('Parking lot 1',
@@ -118,17 +112,15 @@ void getCurrentUser() async{
                               splashColor: Colors.grey,
                               color: Colors.blueGrey,
                               onPressed: () async {
-                                UserHomePage.Lot_name='PA2';
+                                UserHomePage.Lot_name = 'PA2';
                                 //Navigator.of(context).pushReplacementNamed(Parking.route);
                               },
-
                               child: Text('Parking lot 2',
                                   style: TextStyle(fontSize: 25.0)),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(10.0),
-
                           ),
                         ],
                       ),
@@ -143,8 +135,8 @@ void getCurrentUser() async{
                               splashColor: Colors.grey,
                               color: Colors.blueGrey,
                               onPressed: () async {
-                                UserHomePage.Lot_name='PA3';
-                               // Navigator.of(context).pushReplacementNamed(Parking.route);
+                                UserHomePage.Lot_name = 'PA3';
+                                // Navigator.of(context).pushReplacementNamed(Parking.route);
                               },
                               child: Text('Parking lot 3',
                                   style: TextStyle(fontSize: 25.0)),
@@ -152,7 +144,6 @@ void getCurrentUser() async{
                           ),
                           Padding(
                             padding: const EdgeInsets.all(10.0),
-
                           ),
                         ],
                       ),
@@ -167,8 +158,8 @@ void getCurrentUser() async{
                               splashColor: Colors.grey,
                               color: Colors.blueGrey,
                               onPressed: () async {
-                                UserHomePage.Lot_name='PA4';
-                              //  Navigator.of(context).pushReplacementNamed(Parking.route);
+                                UserHomePage.Lot_name = 'PA4';
+                                //  Navigator.of(context).pushReplacementNamed(Parking.route);
                               },
                               child: Text('Parking lot 4',
                                   style: TextStyle(fontSize: 25.0)),
@@ -176,7 +167,6 @@ void getCurrentUser() async{
                           ),
                           Padding(
                             padding: const EdgeInsets.all(10.0),
-
                           ),
                         ],
                       ),
@@ -219,18 +209,27 @@ void getCurrentUser() async{
                   )),
               CustomeListTile(Icons.person, 'Profile',
                   () => {Navigator.of(context).pushNamed(profilePage.route)}),
-              //CustomeListTile(Icons.map, 'Map',  () => {Navigator.of(context).pushNamed(mapPage.route)}), //mapPage
-              CustomeListTile(Icons.report, 'Report', () => {Navigator.of(context).pushNamed(reportPage.route)}),
+              CustomeListTile(
+                  Icons.map,
+                  'Map',
+                  () => {
+                        Navigator.of(context).pushNamed(mapPage.route)
+                      }), //mapPage
+              CustomeListTile(Icons.report, 'Report',
+                  () => {Navigator.of(context).pushNamed(reportPage.route)}),
               CustomeListTile(Icons.question_answer, 'FAQ', () => {}),
-              CustomeListTile(Icons.chat, 'Live Chat', () => {Navigator.of(context).pushNamed(ChatScreen.route)}),
-              CustomeListTile(Icons.phone, 'Contact', () => {Navigator.of(context).pushNamed(ContactUs.route)}),
-              CustomeListTile(Icons.gavel, 'Ticket', () => {}), //Navigator.of(context).pushNamed(ticket.route)
+              CustomeListTile(Icons.chat, 'Live Chat',
+                  () => {Navigator.of(context).pushNamed(ChatScreen.route)}),
+              CustomeListTile(Icons.phone, 'Contact',
+                  () => {Navigator.of(context).pushNamed(ContactUs.route)}),
+              CustomeListTile(Icons.gavel, 'Ticket',
+                  () => {}), //Navigator.of(context).pushNamed(ticket.route)
               // CustomeListTile(Icons.report, 'Violation', () => {Navigator.of(context).pushNamed(ViolationPage.route)}),
-              CustomeListTile(Icons.lock, 'Logout',() async {
-                  final user = await _auth.signOut();
-                  Navigator.of(context).pushNamed(LoginPage.route);
+              CustomeListTile(Icons.lock, 'Logout', () async {
+                final user = await _auth.signOut();
+                Navigator.of(context).pushNamed(LoginPage.route);
               }),
-                 // () => {Navigator.of(context).pushNamed(LoginPage.route)}),
+              // () => {Navigator.of(context).pushNamed(LoginPage.route)}),
 
 //              onPressed: () async {
 //                try {
