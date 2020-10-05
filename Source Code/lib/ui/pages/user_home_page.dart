@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:campusparking/ui/pages/profile_page.dart';
 //import 'package:campusparking/ui/pages/map_page.dart';
-import 'package:campusparking/ui/pages/ticket_page.dart';
+// import 'package:campusparking/ui/pages/ticket_page.dart';
 //import 'Parking.dart';
 import 'chat_screen.dart';
 import 'contact_us_page.dart';
@@ -10,7 +10,8 @@ import 'login_page.dart';
 import 'package:campusparking/ui/widgets/app_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:campusparking/ui/pages/reportPage.dart';
+import 'package:campusparking/ui/pages/reportPage.dart';
+import 'package:campusparking/ui/pages/violationPage.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
@@ -218,12 +219,13 @@ void getCurrentUser() async{
                   )),
               CustomeListTile(Icons.person, 'Profile',
                   () => {Navigator.of(context).pushNamed(profilePage.route)}),
-             // CustomeListTile(Icons.map, 'Map',  () => {Navigator.of(context).pushNamed(mapPage.route)}), //mapPage
-             // CustomeListTile(Icons.report, 'Report', () => {Navigator.of(context).pushNamed(reportPage.route)}),
+              //CustomeListTile(Icons.map, 'Map',  () => {Navigator.of(context).pushNamed(mapPage.route)}), //mapPage
+              CustomeListTile(Icons.report, 'Report', () => {Navigator.of(context).pushNamed(reportPage.route)}),
               CustomeListTile(Icons.question_answer, 'FAQ', () => {}),
               CustomeListTile(Icons.chat, 'Live Chat', () => {Navigator.of(context).pushNamed(ChatScreen.route)}),
               CustomeListTile(Icons.phone, 'Contact', () => {Navigator.of(context).pushNamed(ContactUs.route)}),
-              CustomeListTile(Icons.gavel, 'Ticket', () => {Navigator.of(context).pushNamed(ticket.route)}),
+              CustomeListTile(Icons.gavel, 'Ticket', () => {}), //Navigator.of(context).pushNamed(ticket.route)
+              // CustomeListTile(Icons.report, 'Violation', () => {Navigator.of(context).pushNamed(ViolationPage.route)}),
               CustomeListTile(Icons.lock, 'Logout',() async {
                   final user = await _auth.signOut();
                   Navigator.of(context).pushNamed(LoginPage.route);
