@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // import 'package:campusparking/ui/pages/change_password_page.dart';
 import 'package:campusparking/ui/pages/contact_us_page.dart';
 import 'package:campusparking/ui/pages/forgot_password_page.dart';
-// import 'package:campusparking/ui/pages/map_page.dart';
+import 'package:campusparking/ui/pages/map_page.dart';
 // import 'package:campusparking/ui/pages/ticket_page.dart';
 import 'package:campusparking/ui/pages/user_home_page.dart';
 // import 'ui/pages/Parking.dart';
@@ -35,7 +35,7 @@ void main() async {
       UserHomePage.route: (context) => UserHomePage(),
       // Parking.route: (context) => Parking(),
       profilePage.route: (context) => profilePage(),
-      // mapPage.route: (context) => mapPage(),
+      mapPage.route: (context) => mapPage(),
       ContactUs.route: (context) => ContactUs(),
       // ticket.route: (context) => ticket(),
       ChatScreen.route: (context) => ChatScreen(),
