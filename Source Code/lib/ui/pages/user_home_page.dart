@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:campusparking/ui/pages/profile_page.dart';
-import 'package:campusparking/ui/pages/map_page.dart';
+//import 'package:campusparking/ui/pages/map_page.dart';
 import 'package:campusparking/ui/pages/ticket_page.dart';
-import 'Parking.dart';
+//import 'Parking.dart';
 import 'chat_screen.dart';
 import 'contact_us_page.dart';
 import 'login_page.dart';
 import 'package:campusparking/ui/widgets/app_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:campusparking/ui/pages/reportPage.dart';
+//import 'package:campusparking/ui/pages/reportPage.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
@@ -88,7 +88,7 @@ void getCurrentUser() async{
                               color: Colors.blueGrey,
                               onPressed: () async {
                                 UserHomePage.Lot_name='PA1';
-                                 Navigator.of(context).pushReplacementNamed(Parking.route);
+                                // Navigator.of(context).pushReplacementNamed(Parking.route);
                               },
                               child: Text('Parking lot 1',
                                   style: TextStyle(fontSize: 25.0)),
@@ -118,7 +118,7 @@ void getCurrentUser() async{
                               color: Colors.blueGrey,
                               onPressed: () async {
                                 UserHomePage.Lot_name='PA2';
-                                Navigator.of(context).pushReplacementNamed(Parking.route);
+                                //Navigator.of(context).pushReplacementNamed(Parking.route);
                               },
 
                               child: Text('Parking lot 2',
@@ -143,7 +143,7 @@ void getCurrentUser() async{
                               color: Colors.blueGrey,
                               onPressed: () async {
                                 UserHomePage.Lot_name='PA3';
-                                Navigator.of(context).pushReplacementNamed(Parking.route);
+                               // Navigator.of(context).pushReplacementNamed(Parking.route);
                               },
                               child: Text('Parking lot 3',
                                   style: TextStyle(fontSize: 25.0)),
@@ -167,7 +167,7 @@ void getCurrentUser() async{
                               color: Colors.blueGrey,
                               onPressed: () async {
                                 UserHomePage.Lot_name='PA4';
-                                Navigator.of(context).pushReplacementNamed(Parking.route);
+                              //  Navigator.of(context).pushReplacementNamed(Parking.route);
                               },
                               child: Text('Parking lot 4',
                                   style: TextStyle(fontSize: 25.0)),
@@ -218,8 +218,8 @@ void getCurrentUser() async{
                   )),
               CustomeListTile(Icons.person, 'Profile',
                   () => {Navigator.of(context).pushNamed(profilePage.route)}),
-              CustomeListTile(Icons.map, 'Map',  () => {Navigator.of(context).pushNamed(mapPage.route)}), //mapPage
-              CustomeListTile(Icons.report, 'Report', () => {Navigator.of(context).pushNamed(reportPage.route)}),
+             // CustomeListTile(Icons.map, 'Map',  () => {Navigator.of(context).pushNamed(mapPage.route)}), //mapPage
+             // CustomeListTile(Icons.report, 'Report', () => {Navigator.of(context).pushNamed(reportPage.route)}),
               CustomeListTile(Icons.question_answer, 'FAQ', () => {}),
               CustomeListTile(Icons.chat, 'Live Chat', () => {Navigator.of(context).pushNamed(ChatScreen.route)}),
               CustomeListTile(Icons.phone, 'Contact', () => {Navigator.of(context).pushNamed(ContactUs.route)}),
