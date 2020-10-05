@@ -6,14 +6,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 
-import 'package:testing/shared/loading.dart';
-import 'package:testing/ui/pages/violationPage.dart';
-import 'package:testing/ui/widgets/app_bar.dart';
-import 'package:testing/services/database.dart';
-import 'package:testing/models/user.dart';
-import 'package:testing/ui/pages/user_home_page.dart';
+import 'package:campusparking/ui/widgets/app_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:campusparking/ui/pages/user_home_page.dart';
+import 'package:campusparking/ui/pages/violationPage.dart';
+
+final _firestore = Firestore.instance;
 
 /// ignore: camel_case_types
 class reportPage extends StatefulWidget {
@@ -28,6 +27,22 @@ class _reportPageState extends State<reportPage> {
   @override
   void initState() {
     super.initState();
+  }
+
+  void Report(String vechID, String description) async {
+    String UID = '', docId;
+    final users = await _firestore.collection('User').getDocuments();
+    for (var user in users.documents){
+      if (user.data['Registration ID'] == vechID){
+        UID = user.data['User ID'];
+        docId = user.documentID;
+        _firestore
+        .collection('User')
+        .document(docId);
+        break;
+      } else
+      print('Invaild vehicle number');
+    }
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -70,76 +85,68 @@ class _reportPageState extends State<reportPage> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
-
-    return StreamBuilder<UserData>(
-        stream: DatabaseService(uid: user.uid).userData,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            UserData userData = snapshot.data;
-
-            return loading ? Loading() : Scaffold(
+            return Scaffold(
                 appBar: ApplicationBar(),
                 body: SafeArea(
-                  child: Form(
-                  key: _formKey,
-                  child: Padding(
-                  padding: EdgeInsets.all(10),
-                child: ListView(
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        'Report',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 30),
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        'Report any inconsistent data by entering the details below. Upload image from either gallery or camera',
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Enter vehicle number',
-                        ),
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Vehicle number cannot be empty';
-                          }
-                          _formKey.currentState.save();
-                          return null;
-                        },
-                        onChanged: (value) =>
-                            setState(() => vehicle_no = value),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Enter description',
-                        ),
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Description cannot be empty';
-                          }
-                          _formKey.currentState.save();
-                          return null;
-                        },
-                        onChanged: (value) =>
-                            setState(() => description = value),
-                      ),
-                    ),
-                    Container(
+                    child: Form(
+                        key: _formKey,
+                        child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: ListView(
+                              children: <Widget>[
+                                Container(
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.all(10),
+                                  child: Text(
+                                    'Report',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600, fontSize: 30),
+                                  ),
+                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.all(10),
+                                  child: Text(
+                                    'Report any inconsistent data by entering the details below. Upload image from either gallery or camera',
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(10),
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Enter vehicle number',
+                                    ),
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Vehicle number cannot be empty';
+                                      }
+                                      _formKey.currentState.save();
+                                      return null;
+                                    },
+                                    onChanged: (value) =>
+                                        setState(() => vehicle_no = value),
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(10),
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Enter description',
+                                    ),
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Description cannot be empty';
+                                      }
+                                      _formKey.currentState.save();
+                                      return null;
+                                    },
+                                    onChanged: (value) =>
+                                        setState(() => description = value),
+                                  ),
+                                ),
+                                Container(
                       margin: EdgeInsets.fromLTRB(10.0, 0.0, 0, 0),
                       child: Row(
                         children: <Widget>[
@@ -179,7 +186,7 @@ class _reportPageState extends State<reportPage> {
                       ),
                       Uploader(file: _imageFile)
                     ],
-                    Container(
+                                Container(
                       height: 75,
                       margin: EdgeInsets.fromLTRB(17.0, 15.0, 0, 0),
                       child: Row(
@@ -189,16 +196,13 @@ class _reportPageState extends State<reportPage> {
                             height: 45.0,
                             child: RaisedButton(
                               onPressed: () async {
-                              if (_formKey.currentState.validate()) {
-                                setState(() => loading = true);
-                                await DatabaseService(uid: user.uid).updateUserData(
-                                  vehicle_no ?? userData.vehicleId,
-                                  description ?? userData.desc,
-                                );
+                              _firestore.collection('Report').add({
+                              'Vehicle ID': vehicle_no,
+                              'Description': description,
+                             });
                                 Navigator.of(context)
                                   .pushReplacementNamed(UserHomePage.route);
-                              }
-                            },
+                              },
                               color: Colors.lightBlue,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18.0),
@@ -264,18 +268,11 @@ class _reportPageState extends State<reportPage> {
                         ],
                       ),
                     ),
-                  ],
-                ))
-                ))
-                );
-          } else {
-            return Loading();
-          }
-        });
+                                ]
+                                )
+                                ))));
   }
 }
-
-
 
 class Uploader extends StatefulWidget {
   final File file;
@@ -286,7 +283,7 @@ class Uploader extends StatefulWidget {
 
 class _UploaderState extends State<Uploader> {
   final FirebaseStorage _storage =
-      FirebaseStorage(storageBucket: 'gs://campus-parking-28bb8.appspot.com/');
+      FirebaseStorage(storageBucket: 'gs://campus-parking-e2a4b.appspot.com/');
   StorageUploadTask _uploadTask;
 
   void _startUpload() {

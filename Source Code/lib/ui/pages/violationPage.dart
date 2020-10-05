@@ -7,13 +7,12 @@ import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:testing/shared/loading.dart';
-import 'package:testing/ui/widgets/app_bar.dart';
-import 'package:testing/ui/pages/user_home_page.dart';
-import 'package:testing/models/user.dart';
-import 'package:testing/services/database.dart';
+import 'package:campusparking/ui/widgets/app_bar.dart';
+import 'package:campusparking/ui/pages/user_home_page.dart';
+
+final _firestore = Firestore.instance;
 
 class ViolationPage extends StatefulWidget {
   static const String route = '/violation_page';
@@ -26,6 +25,22 @@ class ViolationPageState extends State<ViolationPage> {
   @override
   void initState() {
     super.initState();
+  }
+
+  void Violations(String vechID, String parkingLotID, String slotID, String time, String date) async {
+    String UID = '', docId;
+    final users = await _firestore.collection('User').getDocuments();
+    for (var user in users.documents){
+      if (user.data['Registration ID'] == vechID){
+        UID = user.data['User ID'];
+        docId = user.documentID;
+        _firestore
+        .collection('User')
+        .document(docId);
+        break;
+      } else
+      print('Invaild vehicle number');
+    }
   }
 
   DateTime selectedDate = DateTime.now();
@@ -77,15 +92,7 @@ class ViolationPageState extends State<ViolationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
-
-    return StreamBuilder<UserViolationData>(
-        stream: DatabaseService(uid: user.uid).userViolationData,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            UserViolationData userViolationData = snapshot.data;
-
-            return loading ? Loading() : Scaffold(
+            return Scaffold(
                     appBar: ApplicationBar(),
                     body: Form(
                       key: _formKey,
@@ -277,20 +284,14 @@ class ViolationPageState extends State<ViolationPage> {
                                         onPressed: () async {
                                           if (_formKey.currentState
                                               .validate()) {
-                                            setState(() => loading = true);
-                                            await DatabaseService(uid: user.uid)
-                                                .updateUserViolationData(
-                                              vehicle_no ??
-                                                  userViolationData.vehicle_no,
-                                              parking_lot_id ??
-                                                  userViolationData
-                                                      .parking_lot_id,
-                                              slot_id ??
-                                                  userViolationData.slot_id,
-                                              timer ?? userViolationData.time,
-                                              formatted ??
-                                                  userViolationData.date,
-                                            );
+                                            setState(() => loading = true);        
+                              _firestore.collection('Violations').add({
+                              'Vehicle ID': vehicle_no,
+                              'ParkingLot ID': parking_lot_id,
+                              'Slot ID' : slot_id,
+                              'Time' : time,
+                              'Date' : date,
+                             });
                                             Navigator.of(context)
                                                 .pushReplacementNamed(
                                                     UserHomePage.route);
@@ -362,12 +363,9 @@ class ViolationPageState extends State<ViolationPage> {
                       ),
                     ),
                   );
-          } else {
-            return Loading();
-          }
-        });
-  }
+  } 
 }
+
 
 Future<DateTime> _selectDateTime(BuildContext context) => showDatePicker(
     context: context,
@@ -393,7 +391,7 @@ class Uploader extends StatefulWidget {
 
 class _UploaderState extends State<Uploader> {
   final FirebaseStorage _storage =
-      FirebaseStorage(storageBucket: 'gs://campus-parking-28bb8.appspot.com/');
+      FirebaseStorage(storageBucket: 'gs://campus-parking-e2a4b.appspot.com/');
   StorageUploadTask _uploadTask;
 
   void _startUpload() {
