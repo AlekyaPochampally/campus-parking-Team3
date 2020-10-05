@@ -4,7 +4,7 @@ import 'package:campusparking/ui/pages/signup_page.dart';
 import 'package:campusparking/ui/pages/user_home_page.dart';
 import 'package:campusparking/ui/widgets/app_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:campusparking/ui/pages/Faq_page.dart';
+import 'package:campusparking/ui/pages/Faq_page.dart';
 
 import 'forgot_password_page.dart';
 
@@ -13,6 +13,7 @@ class LoginPage extends StatefulWidget {
 
   @override
   _LoginPageState createState() => _LoginPageState();
+  
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -148,8 +149,8 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.of(context).pushNamed(SignUpPage.route),
                         child: Text('Sign Up')),
                     FlatButton(
-                        // onPressed: () =>
-                        //     Navigator.of(context).pushNamed(FaQPage.route),
+                        onPressed: () =>
+                            Navigator.of(context).pushNamed(FaQPage.route),
                         child: Text('FAQ'))
                   ],
                 ))
