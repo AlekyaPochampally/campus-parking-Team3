@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'ParkingLotList.dart';
+import 'package:campusparking/ui/widgets/app_bar.dart';
 
 class mapPage extends StatefulWidget {
   static const String route = '/map';
