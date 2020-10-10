@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:campusparking/ui/pages/profile_page.dart';
 import 'package:campusparking/ui/pages/map_page.dart';
 // import 'package:campusparking/ui/pages/ticket_page.dart';
-//import 'Parking.dart';
+import 'Parking.dart';
 import 'chat_screen.dart';
 import 'contact_us_page.dart';
 import 'login_page.dart';
@@ -83,7 +83,7 @@ class _UserHomePageState extends State<UserHomePage> {
                               color: Colors.blueGrey,
                               onPressed: () async {
                                 UserHomePage.Lot_name = 'PA1';
-                                // Navigator.of(context).pushReplacementNamed(Parking.route);
+                                Navigator.of(context).pushReplacementNamed(Parking.route);
                               },
                               child: Text('Parking lot 1',
                                   style: TextStyle(fontSize: 25.0)),

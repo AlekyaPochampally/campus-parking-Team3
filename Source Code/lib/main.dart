@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:campusparking/ui/pages/contact_us_page.dart';
 import 'package:campusparking/ui/pages/forgot_password_page.dart';
 import 'package:campusparking/ui/pages/map_page.dart';
-// import 'package:campusparking/ui/pages/ticket_page.dart';
+import 'package:campusparking/ui/pages/ticket_page.dart';
 import 'package:campusparking/ui/pages/user_home_page.dart';
-// import 'ui/pages/Parking.dart';
-//import 'ui/pages/forgot_password_page.dart';
+import 'ui/pages/Parking.dart';
+import 'ui/pages/forgot_password_page.dart';
 import 'ui/pages/login_page.dart';
-// import 'ui/pages/signup_page.dart';
+ import 'ui/pages/signup_page.dart';
 import 'ui/pages/profile_page.dart';
 import 'ui/pages/Faq_page.dart';
 import 'ui/pages/reportPage.dart';
@@ -30,14 +30,14 @@ void main() async {
       // Login and signup related
       LoginPage.route: (context) => LoginPage(),
       ForgotPasswordPage.route: (context) => ForgotPasswordPage(),
-      // SignUpPage.route: (context) => SignUpPage(),
+       SignUpPage.route: (context) => SignUpPage(),
       //ChangePasswordPage.route: (context) => ChangePasswordPage(),
       UserHomePage.route: (context) => UserHomePage(),
-      // Parking.route: (context) => Parking(),
+       Parking.route: (context) => Parking(),
       profilePage.route: (context) => profilePage(),
       mapPage.route: (context) => mapPage(),
       ContactUs.route: (context) => ContactUs(),
-      // ticket.route: (context) => ticket(),
+      ticket.route: (context) => ticket(),
       ChatScreen.route: (context) => ChatScreen(),
       FaQPage.route: (context) => FaQPage(),
       reportPage.route : (context) => reportPage(),

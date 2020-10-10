@@ -37,7 +37,7 @@ dependencies:
   path_provider: ^1.1.2
   photo_view: ^0.3.1
   google_maps_flutter: 
-
+  toggle_switch: ^0.1.8
   #  google_maps_flutter :
   #geolocator:  ^5.1.3 
    
