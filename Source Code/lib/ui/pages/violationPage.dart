@@ -207,6 +207,7 @@ class ViolationPageState extends State<ViolationPage> {
                                         var timerfor = new DateFormat('HH:mm');
                                         timer = timerfor.format(dt);
                                         print(timer);
+                                        print(formatted);                          
 
                                         setState(() {
                                           this.selectedDate = DateTime(
@@ -284,14 +285,16 @@ class ViolationPageState extends State<ViolationPage> {
                                         onPressed: () async {
                                           if (_formKey.currentState
                                               .validate()) {
-                                            setState(() => loading = true);        
-                              _firestore.collection('Violations').add({
-                              'Vehicle ID': vehicle_no,
-                              'ParkingLot ID': parking_lot_id,
-                              'Slot ID' : slot_id,
-                              'Time' : time,
-                              'Date' : date,
-                             });
+                                            setState(() => loading = true); 
+                                            print(date);
+                                            print(time);       
+                                            _firestore.collection('Violations').add({
+                                            'Vehicle ID': vehicle_no,
+                                            'ParkingLot ID': parking_lot_id,
+                                            'Slot ID' : slot_id,
+                                            'Time' : timer,
+                                            'Date' : formatted,
+                                             });
                                             Navigator.of(context)
                                                 .pushReplacementNamed(
                                                     UserHomePage.route);
