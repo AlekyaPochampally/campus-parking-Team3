@@ -4,7 +4,7 @@ import 'package:campusparking/ui/widgets/app_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-
+import 'package:toast/toast.dart';
 import 'login_page.dart';
 
 final _firestore = Firestore.instance;
@@ -32,12 +32,14 @@ class _SignUpPageState extends State<SignUpPage> {
     super.initState();
   }
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ApplicationBar(),
       body: Form(
-        //key: _formKey,
+        key: _formKey,
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.all(10),
@@ -61,9 +63,18 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       onChanged: (value) {
                         _emailId = value;
-                      }
-//
-                      ),
+                      },
+                      validator: (value) {
+                     if (value.isEmpty) {
+                       return 'Provide an email id';
+                     }
+                     _formKey.currentState.save();
+                     return null;
+                   },
+                   onSaved: (value) {
+                     _emailId = value;
+                   },
+                 ),
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
@@ -74,7 +85,18 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       onChanged: (value) {
                         _name = value;
-                      }),
+                      },
+                      validator: (value) {
+                     if (value.isEmpty) {
+                       return 'Provide your name';
+                     }
+                     _formKey.currentState.save();
+                     return null;
+                   },
+                   onSaved: (value) {
+                     _name = value;
+                   },
+                      ),
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
@@ -85,7 +107,15 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       onChanged: (value) {
                         _registrationPlate = value;
-                      }),
+                      },
+                      validator: (value) {
+                     if (value.isEmpty) {
+                       return 'Provide Registartion plate number';
+                     }
+                     _formKey.currentState.save();
+                     return null;
+                   },
+                   ),
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
@@ -97,18 +127,18 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       onChanged: (value) {
                         _password = value;
+                      },
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Password cannot be empty';
                       }
-//                     validator: (value) {
-//                       if (value.isEmpty) {
-//                         return 'Password cannot be empty';
-//                       }
-//                       if (value.length < 6) {
-//                         return 'Password must be at least 6 characters';
-//                       }
-//                       _formKey.currentState.save();
-//                       return null;
-//                     },
-                      // onSaved: (value) => _password = value,
+                      if (value.length < 6) {
+                        return 'Password must be at least 6 characters';
+                      }
+                      _formKey.currentState.save();
+                      return null;
+                    },
+                      onSaved: (value) => _password = value,
                       ),
                 ),
                 Container(
@@ -121,18 +151,18 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       onChanged: (value) {
                         _repeatPassword = value;
-                      }
-                      // validator: (value) {
-                      //   if (value.isEmpty) {
-                      //     return 'This field cannot be empty';
-                      //   }
-                      //   if (value != _password) {
-                      //     return 'Passwords do not match';
-                      //   }
-                      //   _formKey.currentState.save();
-                      //   return null;
-                      // },
-                      // onSaved: (value) => _repeatPassword = value,
+                      },
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'This field cannot be empty';
+                        }
+                        if (value != _password) {
+                          return 'Passwords do not match';
+                        }
+                        _formKey.currentState.save();
+                        return null;
+                      },
+                      onSaved: (value) => _repeatPassword = value,
                       ),
                 ),
                 Column(
@@ -225,6 +255,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     onPressed: () async {
                       print(_emailId);
                       print(_password);
+                      if (_formKey.currentState.validate()) {
                       try {
                         final newUser =
                             await _auth.createUserWithEmailAndPassword(
@@ -248,9 +279,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           'Vehicle_Type':wheels,
                           });
                           Navigator.pushNamed(context, UserHomePage.route);
+                          Toast.show("SignUp Successful", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
                         }
                       } catch (e) {
                         print(e);
+                      }
                       }
                       // _formKey.currentState.save();
 
@@ -268,7 +301,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       // Navigator.of(context)
                       //  .pushReplacementNamed(LoginPage.route);
                     },
-                    //},
                     child: Text(
                       'Create Account',
                       style: TextStyle(fontSize: 18),

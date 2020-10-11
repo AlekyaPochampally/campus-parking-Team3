@@ -196,12 +196,14 @@ class _reportPageState extends State<reportPage> {
                             height: 45.0,
                             child: RaisedButton(
                               onPressed: () async {
+                                if (_formKey.currentState.validate()) {
                               _firestore.collection('Report').add({
                               'Vehicle ID': vehicle_no,
                               'Description': description,
                              });
                                 Navigator.of(context)
                                   .pushReplacementNamed(UserHomePage.route);
+                              }
                               },
                               color: Colors.lightBlue,
                               shape: RoundedRectangleBorder(

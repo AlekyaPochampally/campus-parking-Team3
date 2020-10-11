@@ -6,6 +6,7 @@ import 'package:campusparking/ui/pages/user_home_page.dart';
 import 'package:campusparking/ui/widgets/app_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:toast/toast.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
@@ -202,6 +203,7 @@ class _ParkingState extends State<Parking> {
                           onPressed: () {
                             Navigator.of(context)
                                 .pushReplacementNamed(Parking.route);
+                                Toast.show("You have Ocuupied the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
                           },
                           color: Colors.red[400],
                           //blue[700],
@@ -229,6 +231,7 @@ class _ParkingState extends State<Parking> {
                             // Navigator.pop(context);
                             Navigator.of(context)
                                 .pushReplacementNamed(UserHomePage.route);
+                                Toast.show("You have Vaccated the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
                           },
                           color: Colors.teal[300],
                           //blue[700],
@@ -330,6 +333,7 @@ class _ParkingState extends State<Parking> {
                         // Navigator.pop(context);
                         Navigator.of(context)
                             .pushReplacementNamed(UserHomePage.route);
+                            Toast.show("You have Reserved the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
                       },
                       color: Colors.blueAccent,
                       //blue[700],
