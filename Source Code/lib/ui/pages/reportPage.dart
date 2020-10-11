@@ -224,7 +224,7 @@ class _reportPageState extends State<reportPage> {
                             ),
                           ),
                           SizedBox(
-                            width: 60.0,
+                            width: 45.0,
                           ),
                             ButtonTheme(
                             minWidth: 150.0,
