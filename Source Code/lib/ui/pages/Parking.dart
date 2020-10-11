@@ -119,12 +119,21 @@ class _ParkingState extends State<Parking> {
     await for (var snapshot
         in _firestore.collection('slot').document(document_id).snapshots()) {
       var data = snapshot.data;
-      if (!data['Is_Occupied']) {
-        occupySlot();
-        break;
-      } else
-        vacateSlot();
-      break;
+      // if (data['User_ID'] == loggedInUser.email)
+      //   {
+          if (!data['Is_Occupied']) {
+            occupySlot();
+            break;
+          } else {
+            if (data['User_ID'] == loggedInUser.email)
+              {vacateSlot();
+               break;
+              }
+            else{
+              print("This user is not allowed to perform the action "+ loggedInUser.email);
+            }
+       }
+
     }
   }
 
@@ -202,7 +211,7 @@ class _ParkingState extends State<Parking> {
                         child: RaisedButton(
                           onPressed: () {
                             Navigator.of(context)
-                                .pushReplacementNamed(Parking.route);
+                                .pushReplacementNamed(UserHomePage.route);
                                 Toast.show("You have Ocuupied the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
                           },
                           color: Colors.red[400],
@@ -214,43 +223,43 @@ class _ParkingState extends State<Parking> {
                           child: Row(
                             children: [
                               Icon(
-                                Icons.directions_car,
+                                Icons.close_rounded,
                                 size: 40.0,
                                 color: Colors.black54,
                               ),
-                              Text('Occupy', style: TextStyle(fontSize: 25.0)),
+                              Text('Cancel', style: TextStyle(fontSize: 25.0)),
                             ],
                           ),
                         ),
                       ),
-                      ButtonTheme(
-                        minWidth: 150.0,
-                        height: 50.0,
-                        child: RaisedButton(
-                          onPressed: () {
-                            // Navigator.pop(context);
-                            Navigator.of(context)
-                                .pushReplacementNamed(UserHomePage.route);
-                                Toast.show("You have Vaccated the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-                          },
-                          color: Colors.teal[300],
-                          //blue[700],
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                              side: BorderSide(color: Colors.grey)),
-                          splashColor: Colors.green,
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.assignment_turned_in,
-                                size: 40.0,
-                                color: Colors.black54,
-                              ),
-                              Text('Vacate', style: TextStyle(fontSize: 25.0)),
-                            ],
-                          ),
-                        ),
-                      ),
+                      // ButtonTheme(
+                      //   minWidth: 150.0,
+                      //   height: 50.0,
+                      //   child: RaisedButton(
+                      //     onPressed: () {
+                      //       // Navigator.pop(context);
+                      //       Navigator.of(context)
+                      //           .pushReplacementNamed(UserHomePage.route);
+                      //           Toast.show("You have Vaccated the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+                      //     },
+                      //     color: Colors.teal[300],
+                      //     //blue[700],
+                      //     shape: RoundedRectangleBorder(
+                      //         borderRadius: BorderRadius.circular(18.0),
+                      //         side: BorderSide(color: Colors.grey)),
+                      //     splashColor: Colors.green,
+                      //     child: Row(
+                      //       children: [
+                      //         Icon(
+                      //           Icons.assignment_turned_in,
+                      //           size: 40.0,
+                      //           color: Colors.black54,
+                      //         ),
+                      //         Text('Vacate', style: TextStyle(fontSize: 25.0)),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -325,34 +334,34 @@ class _ParkingState extends State<Parking> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ButtonTheme(
-                    minWidth: 150.0,
-                    height: 50.0,
-                    child: RaisedButton(
-                      onPressed: () {
-                        // Navigator.pop(context);
-                        Navigator.of(context)
-                            .pushReplacementNamed(UserHomePage.route);
-                            Toast.show("You have Reserved the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-                      },
-                      color: Colors.blueAccent,
-                      //blue[700],
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.grey)),
-                      splashColor: Colors.green,
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.lock,
-                            size: 40.0,
-                            color: Colors.black54,
-                          ),
-                          Text('Reserve', style: TextStyle(fontSize: 25.0)),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // ButtonTheme(
+                  //   minWidth: 150.0,
+                  //   height: 50.0,
+                  //   child: RaisedButton(
+                  //     onPressed: () {
+                  //       // Navigator.pop(context);
+                  //       Navigator.of(context)
+                  //           .pushReplacementNamed(UserHomePage.route);
+                  //           Toast.show("You have Reserved the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+                  //     },
+                  //     color: Colors.blueAccent,
+                  //     //blue[700],
+                  //     shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(18.0),
+                  //         side: BorderSide(color: Colors.grey)),
+                  //     splashColor: Colors.green,
+                  //     child: Row(
+                  //       children: [
+                  //         Icon(
+                  //           Icons.lock,
+                  //           size: 40.0,
+                  //           color: Colors.black54,
+                  //         ),
+                  //         Text('Reserve', style: TextStyle(fontSize: 25.0)),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ],

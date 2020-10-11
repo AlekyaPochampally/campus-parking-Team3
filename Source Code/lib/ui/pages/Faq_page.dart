@@ -39,20 +39,21 @@ class _FaQPageState extends State<FaQPage> {
                           child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          AppBar(
-                            title: Text("Search with keyword",
-                                style: TextStyle(color: Colors.blue)),
-                            backgroundColor: Color(0xFF151026),
-                            actions: <Widget>[
-                              IconButton(
-                                icon: Icon(Icons.search),
-                                color: Colors.blue,
-                                onPressed: () {
-                                  showSearch(
-                                      context: context, delegate: DataSearch());
-                                },
-                              )
-                            ],
+                          OutlineButton(
+                            textColor: Colors.blue,
+                            onPressed: () {
+                              showSearch(
+                                  context: context, delegate: DataSearch());
+                            },
+                            child: Text(
+                              "Search with keyword",
+                              style: TextStyle(fontSize: 25),
+                            ),
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                              style: BorderStyle.solid,
+                              width: 1.8,
+                            ),
                           ),
                           Text('\n\nYou may find your question below.'),
                           FlatButton(
@@ -96,81 +97,187 @@ class _FaQPageState extends State<FaQPage> {
 }
 
 class DataSearch extends SearchDelegate<String> {
-  final keywords = [
-    "login",
-    "reset",
-    "password",
-    "password1",
-    "password2",
-    "account",
-    "ticket",
+  final _data = [
+    "none",
+    "login failed",
+    "reset password",
+    "forgot password",
+    "account logout",
+    "ticket issue",
     "sign up",
-    "report"
+    "report violation"
   ];
 
-  final recentsearch = [
-    "login",
-    "account",
-    "ticket",
+  final _answer = [
+    "none",
+    "Check network connection or password",
+    "login page -> forget passwork",
+    "login page -> forget passwork",
+    "hamburger menu -> log out",
+    "hamburger menu -> ticket",
+    "login page -> sign up",
+    "hamburger menu -> Reprot"
   ];
 
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    // TODO: implement buildActions
-    return [
-      IconButton(
-        icon: Icon(Icons.clear),
-        onPressed: () {
-          query = "";
-        },
-      )
-    ];
-  }
+  final _history  = [
+    "login failed",
+    "account logout",
+    "ticket issue",
+  ];
 
-  @override
+   @override
   Widget buildLeading(BuildContext context) {
-    // TODO: implement buildLeading
     return IconButton(
-        icon: AnimatedIcon(
-          icon: AnimatedIcons.menu_arrow,
-          progress: transitionAnimation,
-        ),
-        onPressed: () {
-          close(context, null);
-        });
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    return Center(
-      child: Container(
-        height: 50,
-        width: 300,
-        child: Card(color: Colors.black, child: Center(child: Text(query))),
+      tooltip: 'Back',
+      icon: AnimatedIcon(
+        icon: AnimatedIcons.menu_arrow,
+        progress: transitionAnimation,
       ),
+      onPressed: () {
+        close(context, null);
+      },
     );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-    final suggestionlist = query.isEmpty
-        ? recentsearch
-        : keywords.where((p) => p.startsWith(query)).toList();
+
+    final Iterable<String> suggestions = query.isEmpty
+        ? _history
+        : _data.where((String i) => i.startsWith(query));
+
+    return _SuggestionList(
+      query: query,
+      suggestions: suggestions.map<String>((String i) => '$i').toList(),
+      onSelected: (String suggestion) {
+        query = suggestion;
+        showResults(context);
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    final String searched = query;
+    if (searched == null || !_data.contains(searched)) {
+      return Center(
+        child: Text(
+          '"$query"\n is not fount.\nTry anohther.',
+          textAlign: TextAlign.center,
+        ),
+      );
+    }
+
+    return ListView(
+      children: <Widget>[
+        _ResultCard(
+          title: searched,
+          res: _answer[_data.indexOf(searched)],
+          searchDelegate: this,
+        ),
+        _ResultCard(
+          title: _data[_data.indexOf(searched)+1 < _data.length ? _data.indexOf(searched)+1 : 0],
+          res: _answer[_data.indexOf(searched)+1 < _data.length ? _data.indexOf(searched)+1 : 0],
+          searchDelegate: this,
+        ),
+        _ResultCard(
+          title: _data[_data.indexOf(searched)+2 < _data.length ? _data.indexOf(searched)+2 : 0],
+          res: _answer[_data.indexOf(searched)+2 < _data.length ? _data.indexOf(searched)+2 : 0],
+          searchDelegate: this,
+        ),
+      ],
+    );
+  }
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return <Widget>[
+      if (query.isEmpty)
+        IconButton(
+          tooltip: 'Voice Search',
+          icon: const Icon(Icons.mic),
+          onPressed: () {
+            query = 'TODO: implement voice input';
+          },
+        )
+      else
+        IconButton(
+          tooltip: 'Clear',
+          icon: const Icon(Icons.clear),
+          onPressed: () {
+            query = '';
+            showSuggestions(context);
+          },
+        ),
+    ];
+  }
+}
+
+class _ResultCard extends StatelessWidget {
+  const _ResultCard({this.res, this.title, this.searchDelegate});
+
+  final String res;
+  final String title;
+  final SearchDelegate<String> searchDelegate;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return GestureDetector(
+      onTap: () {
+        searchDelegate.close(context, res);
+      },
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              Text(title),
+              Text(
+                '$res',
+                style: theme.textTheme.headline5.copyWith(fontSize: 20.0),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SuggestionList extends StatelessWidget {
+  const _SuggestionList({this.suggestions, this.query, this.onSelected});
+
+  final List<String> suggestions;
+  final String query;
+  final ValueChanged<String> onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return ListView.builder(
-      itemBuilder: (context, index) => ListTile(
-          leading: Icon(Icons.replay),
+      itemCount: suggestions.length,
+      itemBuilder: (BuildContext context, int i) {
+        final String suggestion = suggestions[i];
+        return ListTile(
+          leading: query.isEmpty ? const Icon(Icons.history) : const Icon(null),
           title: RichText(
-              text: TextSpan(
-                  text: suggestionlist[index].substring(0, query.length),
-                  style: TextStyle(
-                      color: Colors.blue[50], fontWeight: FontWeight.bold),
-                  children: [
+            text: TextSpan(
+              text: suggestion.substring(0, query.length),
+              style: theme.textTheme.subtitle1.copyWith(fontWeight: FontWeight.bold),
+              children: <TextSpan>[
                 TextSpan(
-                    text: suggestionlist[index].substring(query.length),
-                    style: TextStyle(color: Colors.grey))
-              ]))),
-      itemCount: suggestionlist.length,
+                  text: suggestion.substring(query.length),
+                  style: theme.textTheme.subtitle1,
+                ),
+              ],
+            ),
+          ),
+          onTap: () {
+            onSelected(suggestion);
+          },
+        );
+      },
     );
   }
 }
