@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:campusparking/ui/pages/profile_page.dart';
 import 'package:campusparking/ui/pages/map_page.dart';
-// import 'package:campusparking/ui/pages/ticket_page.dart';
+import 'package:campusparking/ui/pages/ticket_page.dart';
 import 'Parking.dart';
 import 'chat_screen.dart';
 import 'contact_us_page.dart';
@@ -223,7 +223,7 @@ class _UserHomePageState extends State<UserHomePage> {
               CustomeListTile(Icons.phone, 'Contact',
                   () => {Navigator.of(context).pushNamed(ContactUs.route)}),
               CustomeListTile(Icons.gavel, 'Ticket',
-                  () => {}), //Navigator.of(context).pushNamed(ticket.route)
+                  () => {Navigator.of(context).pushNamed(ticket.route)}), //Navigator.of(context).pushNamed(ticket.route)
               // CustomeListTile(Icons.report, 'Violation', () => {Navigator.of(context).pushNamed(ViolationPage.route)}),
               CustomeListTile(Icons.lock, 'Logout', () async {
                 final user = await _auth.signOut();
