@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
-// import 'package:campusparking/ui/pages/signup_page.dart';
+import 'package:campusparking/ui/pages/signup_page.dart';
 import 'package:campusparking/ui/pages/user_home_page.dart';
 import 'package:campusparking/ui/widgets/app_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:campusparking/ui/pages/Faq_page.dart';
-
+import 'package:toast/toast.dart';
 import 'forgot_password_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -27,6 +27,7 @@ class _LoginPageState extends State<LoginPage> {
 //  void initState() {
 //    super.initState();
 //  }
+final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
         appBar: ApplicationBar(),
         body: SafeArea(
             child: Form(
-
+          key: _formKey,
           child: Padding(
             padding: EdgeInsets.all(10),
             child: ListView(
@@ -68,16 +69,16 @@ class _LoginPageState extends State<LoginPage> {
                     onChanged: (value) {
                       _email = value;
                     },
-//                    validator: (value) {
-//                      if (value.isEmpty) {
-//                        return 'Provide an email id';
-//                      }
-//                      _formKey.currentState.save();
-//                      return null;
-//                    },
-//                    onSaved: (value) {
-//                      _email = value;
-//                    },
+                   validator: (value) {
+                     if (value.isEmpty) {
+                       return 'Provide an email id';
+                     }
+                     _formKey.currentState.save();
+                     return null;
+                   },
+                   onSaved: (value) {
+                     _email = value;
+                   },
                   ),
                 ),
 
@@ -93,16 +94,16 @@ class _LoginPageState extends State<LoginPage> {
                     onChanged: (value) {
                       _password = value;
                     },
-//                    validator: (value) {
-//                      if (value.isEmpty) {
-//                        return 'Provide your password';
-//                      }
-//                      _formKey.currentState.save();
-//                      return null;
-//                    },
-//                    onSaved: (value) {
-//                      _password = value;
-//                    },
+                   validator: (value) {
+                     if (value.isEmpty) {
+                       return 'Provide your password';
+                     }
+                     _formKey.currentState.save();
+                     return null;
+                   },
+                   onSaved: (value) {
+                     _password = value;
+                   },
                   ),
                 ),
 
@@ -114,17 +115,31 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       RaisedButton(
                         onPressed: () async {
-                          try {
+                         
+                          if (_formKey.currentState.validate()) {
+                            try {
                             print(_email);
                             print(_password);
-
                             final user = await _auth.signInWithEmailAndPassword(
                                 email: _email, password: _password);
+                            Toast.show("LoggedIn Successful", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);    
                             if (user != null)
                               Navigator.pushNamed(context,UserHomePage.route);
+                              
                           } catch (e) {
                             print(e);
                           }
+                          }
+                          // try {
+                          //   print(_email);
+                          //   print(_password);
+                          //   final user = await _auth.signInWithEmailAndPassword(
+                          //       email: _email, password: _password);
+                          //   if (user != null)
+                          //     Navigator.pushNamed(context,UserHomePage.route);
+                          // } catch (e) {
+                          //   print(e);
+                          // }
                         },
                         child: Text(
                           'Login',
@@ -145,9 +160,9 @@ class _LoginPageState extends State<LoginPage> {
                             .pushNamed(ForgotPasswordPage.route),
                         child: Text('Forgot Password')),
                     FlatButton(
-                        // onPressed: () =>
-                            // Navigator.of(context).pushNamed(SignUpPage.route),
-                        // child: Text('Sign Up')
+                        onPressed: () =>
+                            Navigator.of(context).pushNamed(SignUpPage.route),
+                        child: Text('Sign Up')
                         ),
                     FlatButton(
                         onPressed: () =>

@@ -12,6 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:campusparking/ui/pages/reportPage.dart';
 import 'package:campusparking/ui/pages/violationPage.dart';
+import 'package:toast/toast.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
@@ -228,6 +229,7 @@ class _UserHomePageState extends State<UserHomePage> {
               CustomeListTile(Icons.lock, 'Logout', () async {
                 final user = await _auth.signOut();
                 Navigator.of(context).pushNamed(LoginPage.route);
+                Toast.show("LoggedOut Successful", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
               }),
               // () => {Navigator.of(context).pushNamed(LoginPage.route)}),
 
