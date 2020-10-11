@@ -1,3 +1,4 @@
+import 'package:campusparking/ui/pages/Faq_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:campusparking/ui/pages/profile_page.dart';
@@ -209,15 +210,12 @@ class _UserHomePageState extends State<UserHomePage> {
                   )),
               CustomeListTile(Icons.person, 'Profile',
                   () => {Navigator.of(context).pushNamed(profilePage.route)}),
-              CustomeListTile(
-                  Icons.map,
-                  'Map',
-                  () => {
-                        Navigator.of(context).pushNamed(mapPage.route)
-                      }), //mapPage
+              CustomeListTile(Icons.map, 'Map',
+                  () => {Navigator.of(context).pushNamed(mapPage.route)}), //mapPage
               CustomeListTile(Icons.report, 'Report',
                   () => {Navigator.of(context).pushNamed(reportPage.route)}),
-              CustomeListTile(Icons.question_answer, 'FAQ', () => {}),
+              CustomeListTile(Icons.question_answer, 'FAQ', 
+                  () => {Navigator.of(context).pushNamed(FaQPage.route)}),
               CustomeListTile(Icons.chat, 'Live Chat',
                   () => {Navigator.of(context).pushNamed(ChatScreen.route)}),
               CustomeListTile(Icons.phone, 'Contact',

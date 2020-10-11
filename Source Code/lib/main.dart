@@ -10,7 +10,7 @@ import 'package:campusparking/ui/pages/user_home_page.dart';
 import 'ui/pages/Parking.dart';
 import 'ui/pages/forgot_password_page.dart';
 import 'ui/pages/login_page.dart';
- import 'ui/pages/signup_page.dart';
+import 'ui/pages/signup_page.dart';
 import 'ui/pages/profile_page.dart';
 import 'ui/pages/Faq_page.dart';
 import 'ui/pages/reportPage.dart';
