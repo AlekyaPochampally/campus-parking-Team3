@@ -119,12 +119,21 @@ class _ParkingState extends State<Parking> {
     await for (var snapshot
         in _firestore.collection('slot').document(document_id).snapshots()) {
       var data = snapshot.data;
-      if (!data['Is_Occupied']) {
-        occupySlot();
-        break;
-      } else
-        vacateSlot();
-      break;
+      // if (data['User_ID'] == loggedInUser.email)
+      //   {
+          if (!data['Is_Occupied']) {
+            occupySlot();
+            break;
+          } else {
+            if (data['User_ID'] == loggedInUser.email)
+              {vacateSlot();
+               break;
+              }
+            else{
+              print("This user is not allowed to perform the action "+ loggedInUser.email);
+            }
+       }
+
     }
   }
 
