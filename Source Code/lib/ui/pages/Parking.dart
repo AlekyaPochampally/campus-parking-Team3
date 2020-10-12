@@ -71,7 +71,7 @@ class _ParkingState extends State<Parking> {
     });
 
     print('requested slot occupied successfully');
-    Toast.show("You have Ocuupied the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+    Toast.show("You have Ocuupied the slot", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
   }
 
   //code for vacating a slot
@@ -139,6 +139,8 @@ class _ParkingState extends State<Parking> {
         }
         else{
           print("This user is not allowed to perform the action "+ loggedInUser.email);
+          Toast.show("Someone else already occupied this slot", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+
         }
       }
 

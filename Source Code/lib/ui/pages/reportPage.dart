@@ -40,7 +40,7 @@ class _reportPageState extends State<reportPage> {
         .collection('User')
         .document(docId);
         break;
-        
+
       } else
       print('Invaild vehicle number');
       Toast.show("Invaild Vehicle Number", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
@@ -203,6 +203,7 @@ class _reportPageState extends State<reportPage> {
                               'Vehicle ID': vehicle_no,
                               'Description': description,
                              });
+                              Toast.show("Reported Successful", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
                                 Navigator.of(context)
                                   .pushReplacementNamed(reportPage.route);
                               }

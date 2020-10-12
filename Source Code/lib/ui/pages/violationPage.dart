@@ -8,7 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:toast/toast.dart';
 import 'package:campusparking/ui/widgets/app_bar.dart';
 import 'package:campusparking/ui/pages/user_home_page.dart';
 
@@ -295,6 +295,7 @@ class ViolationPageState extends State<ViolationPage> {
                                             'Time' : timer,
                                             'Date' : formatted,
                                              });
+                                              Toast.show("Reported Violation Successful", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
                                             Navigator.of(context)
                                                 .pushReplacementNamed(
                                                     ViolationPage.route);

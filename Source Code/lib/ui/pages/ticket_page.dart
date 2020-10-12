@@ -18,6 +18,7 @@ class ticket extends StatefulWidget {
 }
 
 class _ticketState extends State<ticket> {
+  
   @override
   void initState() {
     super.initState();
@@ -35,13 +36,15 @@ class _ticketState extends State<ticket> {
           UID = user.data['User_ID'];
           docId = user.documentID;
          // print(UID);
+         
           if (action)
          { tickets = user.data['Num_Tickets'] + 1; //adding new ticket
-           Toast.show("Successfully Raised a ticket", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+           
+           Toast.show("Successfully Raised a ticket", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
          }
           else
            { tickets = user.data['Num_Tickets'] - 1; //removing ticket
-             Toast.show("Successfully Droped a ticket", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+             Toast.show("Successfully Droped a ticket", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
            }
          // print('tickets $tickets');
           _firestore
@@ -53,7 +56,7 @@ class _ticketState extends State<ticket> {
           //user.data.update('Num_Tickets', (tickets) => null);
         } else
           print('invalid vehicle number');
-          Toast.show("Invalid Vehicle number", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+          Toast.show("Invalid Vehicle number", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
 
     }
 
@@ -206,7 +209,8 @@ class _ticketState extends State<ticket> {
                           // Navigator.pop(context);
                           if (_formKey.currentState.validate()) {
                           Ticket(vehicleNum, reason, action);
-                          Navigator.of(context).pushReplacementNamed(UserHomePage.route);
+                         
+                         
                           }
                         },
                         color: Colors.teal[400],
