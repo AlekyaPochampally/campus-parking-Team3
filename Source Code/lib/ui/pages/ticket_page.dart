@@ -18,7 +18,6 @@ class ticket extends StatefulWidget {
 }
 
 class _ticketState extends State<ticket> {
-  
   @override
   void initState() {
     super.initState();
@@ -36,15 +35,13 @@ class _ticketState extends State<ticket> {
           UID = user.data['User_ID'];
           docId = user.documentID;
          // print(UID);
-         
           if (action)
          { tickets = user.data['Num_Tickets'] + 1; //adding new ticket
-           
-           Toast.show("Successfully Raised a ticket", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+           Toast.show("Successfully Raised a ticket", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
          }
           else
            { tickets = user.data['Num_Tickets'] - 1; //removing ticket
-             Toast.show("Successfully Droped a ticket", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+             Toast.show("Successfully Droped a ticket", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
            }
          // print('tickets $tickets');
           _firestore
@@ -56,7 +53,7 @@ class _ticketState extends State<ticket> {
           //user.data.update('Num_Tickets', (tickets) => null);
         } else
           print('invalid vehicle number');
-          Toast.show("Invalid Vehicle number", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+          Toast.show("Invalid Vehicle number", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
 
     }
 
@@ -74,8 +71,6 @@ class _ticketState extends State<ticket> {
       });
     } //updated ticket table
   }
-
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget buildButton(
@@ -107,8 +102,6 @@ class _ticketState extends State<ticket> {
     return Scaffold(
         appBar: ApplicationBar(),
         body: SafeArea(
-          child: Form(
-            key: _formKey,
           child: ListView(
             //  mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -137,20 +130,11 @@ class _ticketState extends State<ticket> {
                     border: OutlineInputBorder(),
                     labelText: 'Vehicle Number',
                   ),
-                  validator: (value) {
-                                      if (value.isEmpty) {
-                                        return 'Vehicle number cannot be empty';
-                                      }
-                                      _formKey.currentState.save();
-                                      return null;
-                                    },
-                  onChanged: (value) => 
-                     setState(() => vehicleNum = value),
+                  onChanged: (value) {
+                    vehicleNum = value;
+                  },
                 ),
               ),
-              //     },
-              //   ),
-              // ),
               Container(
                 padding: EdgeInsets.all(10),
                 child: TextFormField(
@@ -158,18 +142,11 @@ class _ticketState extends State<ticket> {
                     border: OutlineInputBorder(),
                     labelText: 'Reason for ticket',
                   ),
-                   validator: (value) {
-                                      if (value.isEmpty) {
-                                        return 'Reason cannot be empty';
-                                      }
-                                      _formKey.currentState.save();
-                                      return null;
-                                    },
-                  onChanged: (value) => 
-                     setState(() => vehicleNum = value),
+                  onChanged: (value) {
+                    reason = value;
+                  },
                 ),
               ),
-          
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -207,11 +184,10 @@ class _ticketState extends State<ticket> {
                       child: RaisedButton(
                         onPressed: () {
                           // Navigator.pop(context);
-                          if (_formKey.currentState.validate()) {
+                          
                           Ticket(vehicleNum, reason, action);
-                         
-                         
-                          }
+                          
+                          
                         },
                         color: Colors.teal[400],
                         //blue[700],
@@ -254,6 +230,6 @@ class _ticketState extends State<ticket> {
               ),
             ],
           ),
-        )));
+        ));
   }
 }
