@@ -29,24 +29,6 @@ class _reportPageState extends State<reportPage> {
     super.initState();
   }
 
-  void Report(String vechID, String description) async {
-    String UID = '', docId;
-    final users = await _firestore.collection('User').getDocuments();
-    for (var user in users.documents){
-      if (user.data['Registration ID'] == vechID){
-        UID = user.data['User ID'];
-        docId = user.documentID;
-        _firestore
-        .collection('User')
-        .document(docId);
-        break;
-
-      } else
-      print('Invaild vehicle number');
-      Toast.show("Invaild Vehicle Number", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-    }
-  }
-
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 

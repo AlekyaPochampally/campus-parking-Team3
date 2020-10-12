@@ -55,7 +55,16 @@ class _FaQPageState extends State<FaQPage> {
                               width: 1.8,
                             ),
                           ),
-                          Text('\n\nYou may find your question below.'),
+                          Container(
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.all(10),
+                                  child: Text(
+                                    'You may find your question below.',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600, fontSize: 23),
+                                  ),
+                                ),
+                          // Text('\n\nYou may find your question below.'),
                           FlatButton(
                               onPressed: () => showDialog(
                                   context: context,
@@ -64,10 +73,20 @@ class _FaQPageState extends State<FaQPage> {
                                       title:
                                           Text("Q: Can't access your account?"),
                                       content: Text(
-                                          "A: Check your network connection or call 123-321 4567 for help."),
+                                          "A: Check your network connection or call 123-321 4567 for help."), 
                                     );
-                                  }),
-                              child: Text('1. Can\'t access your account?')),
+                                  }),),
+                                  Container(
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.all(1),
+                                  child: Text(
+                                    '1. Cannot access your account?.',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600, fontSize: 20),
+                                  ),
+                                ),
+                              //child: Text('1. Can\'t access your account?')),
+                              
                           FlatButton(
                               onPressed: () => showDialog(
                                   context: context,
@@ -77,19 +96,37 @@ class _FaQPageState extends State<FaQPage> {
                                       content: Text(
                                           "A: Login page -> forget password or call 123-321 4567 for help."),
                                     );
-                                  }),
-                              child: Text('2. How to reset password?')),
+                                  }),),
+                                  Container(
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.all(1),
+                                  child: Text(
+                                    '2. How to reset password?',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600, fontSize: 20),
+                                  ),
+                                ),
+                             // child: Text('2. How to reset password?')),
                           FlatButton(
                               onPressed: () => showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                      title: Text("Q: How to part my vehicle?"),
+                                      title: Text("Q: How to park my vehicle?"),
                                       content: Text(
                                           "A: login your account then go to park page choose an avaible slot, park your vehicle there then press finish parking button, or call 123-321 4567 for more help."),
                                     );
-                                  }),
-                              child: Text('3. How to part my vehicle?'))
+                                  }),),
+                                  Container(
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.all(1),
+                                  child: Text(
+                                    '3. How to park my vehicle?',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600, fontSize: 20),
+                                  ),
+                                ),
+                              // child: Text('3. How to park my vehicle?'))
                         ],
                       ))
                     ])))));
@@ -162,7 +199,7 @@ class DataSearch extends SearchDelegate<String> {
     if (searched == null || !_data.contains(searched)) {
       return Center(
         child: Text(
-          '"$query"\n is not fount.\nTry anohther.',
+          '"$query"\n is not found.\nTry another.',
           textAlign: TextAlign.center,
         ),
       );

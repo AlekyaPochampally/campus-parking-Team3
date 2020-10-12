@@ -27,22 +27,6 @@ class ViolationPageState extends State<ViolationPage> {
     super.initState();
   }
 
-  void Violations(String vechID, String parkingLotID, String slotID, String time, String date) async {
-    String UID = '', docId;
-    final users = await _firestore.collection('User').getDocuments();
-    for (var user in users.documents){
-      if (user.data['Registration ID'] == vechID){
-        UID = user.data['User ID'];
-        docId = user.documentID;
-        _firestore
-        .collection('User')
-        .document(docId);
-        break;
-      } else
-      print('Invaild vehicle number');
-    }
-  }
-
   DateTime selectedDate = DateTime.now();
   final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm');
 
