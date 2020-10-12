@@ -20,23 +20,23 @@ class Parking extends StatefulWidget {
 
 class _ParkingState extends State<Parking> {
   final _auth = FirebaseAuth.instance;
-  bool Is_Occupied, Slot_Type, changeColor = false,changeColor1=false;
-  String User_ID, document_id,Lot_Name;
+  bool Is_Occupied, Slot_Type, changeColor = false, changeColor1 = false;
+  String User_ID, document_id, Lot_Name;
   int Lot_ID, Slot_ID;
 
   @override
   void initState() {
     super.initState();
     getCurrentUser();
-    UserHomePage.available=0;
-    Lot_Name=UserHomePage.Lot_name.substring(2);
+    UserHomePage.available = 0;
+    Lot_Name = UserHomePage.Lot_name.substring(2);
     availableSlots();
   }
 
 //code for available number of slots
   void availableSlots() async {
     print('this is available slot function');
-    print( UserHomePage.Lot_name);
+    print(UserHomePage.Lot_name);
     await for (var snapshot in _firestore.collection('slot').snapshots()) {
       for (var slot in snapshot.documentChanges) {
         //print('got inside for');
@@ -62,7 +62,7 @@ class _ParkingState extends State<Parking> {
 //code for occupying a slot
   void occupySlot() {
     var occupied =
-    _firestore.collection('slot').document(document_id).updateData({
+        _firestore.collection('slot').document(document_id).updateData({
       'Is_Occupied': true,
       'User_ID': User_ID,
     });
@@ -71,20 +71,22 @@ class _ParkingState extends State<Parking> {
     });
 
     print('requested slot occupied successfully');
-    Toast.show("You have Ocuupied the slot", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+    Toast.show("You have Ocuupied the slot", context,
+        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
   }
 
   //code for vacating a slot
   void vacateSlot() {
     var occupied =
-    _firestore.collection('slot').document(document_id).updateData({
+        _firestore.collection('slot').document(document_id).updateData({
       'Is_Occupied': false,
       'User_ID': User_ID,
     });
     setState(() {
       changeColor1 = false;
     });
-   Toast.show("You have Vacated the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+    Toast.show("You have Vacated the slot", context,
+        duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
     print('requested slot vacated successfully');
   }
 
@@ -92,13 +94,14 @@ class _ParkingState extends State<Parking> {
   void reserveSlot(String buttonText) {
     document_id = UserHomePage.Lot_name + '-' + buttonText;
     var occupied =
-    _firestore.collection('slot').document(document_id).updateData({
+        _firestore.collection('slot').document(document_id).updateData({
       'Is_Reserved': true,
       'User_ID': User_ID,
     });
 
     print('requested slot reserved successfully');
-    Toast.show("You have Reserved the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+    Toast.show("You have Reserved the slot", context,
+        duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
   }
 
   //get current user
@@ -114,17 +117,16 @@ class _ParkingState extends State<Parking> {
       print(e);
     }
   }
-  // chaging button color
-  void changeButtonColor() async{
 
-  }
+  // chaging button color
+  void changeButtonColor() async {}
 
 //checking whether slot is vacant or occupied
   Future buttonPressed(String buttonText) async {
     document_id = UserHomePage.Lot_name + '-' + buttonText;
     print('button pressed $document_id');
     await for (var snapshot
-    in _firestore.collection('slot').document(document_id).snapshots()) {
+        in _firestore.collection('slot').document(document_id).snapshots()) {
       var data = snapshot.data;
       // if (data['User_ID'] == loggedInUser.email)
       //   {
@@ -133,24 +135,23 @@ class _ParkingState extends State<Parking> {
 
         break;
       } else {
-        if (data['User_ID'] == loggedInUser.email)
-        {vacateSlot();
-        break;
-        }
-        else{
-          print("This user is not allowed to perform the action "+ loggedInUser.email);
-          Toast.show("Someone else already occupied this slot", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
-
+        if (data['User_ID'] == loggedInUser.email) {
+          vacateSlot();
+          break;
+        } else {
+          print("This user is not allowed to perform the action " +
+              loggedInUser.email);
+          Toast.show("Someone else already occupied this slot", context,
+              duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
         }
       }
-
     }
   }
+
   Widget buildButton(String buttonText) {
     bool added = false;
     return Container(
       child: GestureDetector(
-
         child: FlatButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(0.0),
@@ -163,10 +164,10 @@ class _ParkingState extends State<Parking> {
               reserveSlot(buttonText);
             },
             onPressed: () => {
-              //  setState(() {
-              buttonPressed(buttonText),
-              // }),
-            },
+                  //  setState(() {
+                  buttonPressed(buttonText),
+                  // }),
+                },
             child: Text(
               buttonText,
               style: TextStyle(
@@ -178,9 +179,6 @@ class _ParkingState extends State<Parking> {
     );
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     bool added = false;
@@ -190,6 +188,15 @@ class _ParkingState extends State<Parking> {
           child: ListView(
             //  mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Align(
+                alignment: Alignment.topRight,
+                child: Tooltip(
+                  message: 'Long Press for Reserve \n Press for vacate and occupy',
+                  child: FlatButton(
+                    child: Icon(Icons.help),
+                  ),
+                ),
+              ),
               Container(
                 alignment: Alignment.center,
                 padding: EdgeInsets.all(10),
@@ -208,7 +215,6 @@ class _ParkingState extends State<Parking> {
               SizedBox(
                 height: 20,
               ),
-             
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -256,15 +262,12 @@ class _ParkingState extends State<Parking> {
                           buildButton("6"),
                           buildButton("7"),
                           buildButton("8"),
-
                         ]),
                         TableRow(children: [
                           buildButton("9"),
                           buildButton("10"),
                           buildButton("11"),
                           buildButton("12"),
-
-
                         ]),
                       ],
                     ),
@@ -274,16 +277,15 @@ class _ParkingState extends State<Parking> {
               SizedBox(
                 height: 20,
               ),
-               Container(
-
+              Container(
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                height: 10,
-              ),
+                        height: 10,
+                      ),
                       ButtonTheme(
                         minWidth: 150.0,
                         height: 50.0,
@@ -291,7 +293,6 @@ class _ParkingState extends State<Parking> {
                           onPressed: () {
                             Navigator.of(context)
                                 .pushReplacementNamed(UserHomePage.route);
-                            
                           },
                           color: Colors.red[400],
                           //blue[700],
@@ -302,9 +303,7 @@ class _ParkingState extends State<Parking> {
                           child: Row(
                             children: [
                               Icon(
-
                                 Icons.closed_caption,
-
                                 size: 40.0,
                                 color: Colors.black54,
                               ),
@@ -313,7 +312,6 @@ class _ParkingState extends State<Parking> {
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),

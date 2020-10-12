@@ -122,7 +122,7 @@ final _formKey = GlobalKey<FormState>();
                             print(_password);
                             final user = await _auth.signInWithEmailAndPassword(
                                 email: _email, password: _password);
-                            Toast.show("LoggedIn Successful", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);    
+                            Toast.show("Logged in Successfully", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
                             if (user != null)
                               Navigator.pushNamed(context,UserHomePage.route);
                               

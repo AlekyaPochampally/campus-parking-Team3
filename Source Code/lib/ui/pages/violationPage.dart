@@ -220,7 +220,7 @@ class ViolationPageState extends State<ViolationPage> {
                                         });
                                       },
                                       child: Text(
-                                        'Choose Date and Time',
+                                        'Choose Date & Time',
                                         style: TextStyle(fontSize: 18),
                                       ),
                                     ),
