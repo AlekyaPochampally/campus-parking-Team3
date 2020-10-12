@@ -20,7 +20,7 @@ class Parking extends StatefulWidget {
 
 class _ParkingState extends State<Parking> {
   final _auth = FirebaseAuth.instance;
-  bool Is_Occupied, Slot_Type, changeColor = false;
+  bool Is_Occupied, Slot_Type, changeColor = false,changeColor1=false;
   String User_ID, document_id;
   int Lot_ID, Slot_ID;
 
@@ -38,9 +38,9 @@ class _ParkingState extends State<Parking> {
     print( UserHomePage.Lot_name);
     await for (var snapshot in _firestore.collection('slot').snapshots()) {
       for (var slot in snapshot.documentChanges) {
-        print('got inside for');
+        //print('got inside for');
         if (slot.document.documentID.contains(UserHomePage.Lot_name)) {
-          print('got inside 1st if');
+          //print('got inside 1st if');
           if (slot.document.data['Is_Occupied']) {
             setState(() {
               UserHomePage.available--;
@@ -49,11 +49,11 @@ class _ParkingState extends State<Parking> {
           } else {
             setState(() {
               UserHomePage.available++;
-              print(slot.document.documentID);
+              // print(slot.document.documentID);
             });
           }
         }
-        print('Available ${UserHomePage.available}');
+        //print('Available ${UserHomePage.available}');
       }
     }
   }
@@ -66,7 +66,7 @@ class _ParkingState extends State<Parking> {
       'User_ID': User_ID,
     });
     setState(() {
-      changeColor = true;
+      changeColor1 = true;
     });
 
     print('requested slot occupied successfully');
@@ -75,12 +75,12 @@ class _ParkingState extends State<Parking> {
   //code for vacating a slot
   void vacateSlot() {
     var occupied =
-        _firestore.collection('slot').document(document_id).updateData({
+    _firestore.collection('slot').document(document_id).updateData({
       'Is_Occupied': false,
       'User_ID': User_ID,
     });
     setState(() {
-      changeColor = false;
+      changeColor1 = false;
     });
 
     print('requested slot vacated successfully');
@@ -90,7 +90,7 @@ class _ParkingState extends State<Parking> {
   void reserveSlot(String buttonText) {
     document_id = UserHomePage.Lot_name + '-' + buttonText;
     var occupied =
-        _firestore.collection('slot').document(document_id).updateData({
+    _firestore.collection('slot').document(document_id).updateData({
       'Is_Reserved': true,
       'User_ID': User_ID,
     });
@@ -111,33 +111,36 @@ class _ParkingState extends State<Parking> {
       print(e);
     }
   }
+  // chaging button color
+  void changeButtonColor() async{
+
+  }
 
 //checking whether slot is vacant or occupied
   Future buttonPressed(String buttonText) async {
     document_id = UserHomePage.Lot_name + '-' + buttonText;
     print('button pressed $document_id');
     await for (var snapshot
-        in _firestore.collection('slot').document(document_id).snapshots()) {
+    in _firestore.collection('slot').document(document_id).snapshots()) {
       var data = snapshot.data;
       // if (data['User_ID'] == loggedInUser.email)
       //   {
-          if (!data['Is_Occupied']) {
-            occupySlot();
-            break;
-          } else {
-            if (data['User_ID'] == loggedInUser.email)
-              {vacateSlot();
-               break;
-              }
-            else{
-              print("This user is not allowed to perform the action "+ loggedInUser.email);
-            }
-       }
+      if (!data['Is_Occupied']) {
+        occupySlot();
+
+        break;
+      } else {
+        if (data['User_ID'] == loggedInUser.email)
+        {vacateSlot();
+        break;
+        }
+        else{
+          print("This user is not allowed to perform the action "+ loggedInUser.email);
+        }
+      }
 
     }
   }
-
-  @override
   Widget buildButton(String buttonText) {
     bool added = false;
     return Container(
@@ -149,15 +152,16 @@ class _ParkingState extends State<Parking> {
                 side: BorderSide(
                     color: Colors.white, width: 2, style: BorderStyle.solid)),
             padding: EdgeInsets.all(16.0),
-            color: Colors.lightBlueAccent,
+            color: changeColor ? Colors.redAccent : Colors.lightBlueAccent,
+            //Colors.lightBlueAccent,
             onLongPress: () {
               reserveSlot(buttonText);
             },
             onPressed: () => {
-                //  setState(() {
-                    buttonPressed(buttonText),
-                 // }),
-                },
+              //  setState(() {
+              buttonPressed(buttonText),
+              // }),
+            },
             child: Text(
               buttonText,
               style: TextStyle(
@@ -168,6 +172,9 @@ class _ParkingState extends State<Parking> {
       ),
     );
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -197,9 +204,7 @@ class _ParkingState extends State<Parking> {
                 height: 20,
               ),
               Container(
-                //alignment: Alignment.centerRight,
-                //alignment: Alignment.centerRight,
-                //padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Row(
@@ -212,7 +217,7 @@ class _ParkingState extends State<Parking> {
                           onPressed: () {
                             Navigator.of(context)
                                 .pushReplacementNamed(UserHomePage.route);
-                                Toast.show("You have Ocuupied the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+                            Toast.show("You have Ocuupied the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
                           },
                           color: Colors.red[400],
                           //blue[700],
@@ -232,34 +237,7 @@ class _ParkingState extends State<Parking> {
                           ),
                         ),
                       ),
-                      // ButtonTheme(
-                      //   minWidth: 150.0,
-                      //   height: 50.0,
-                      //   child: RaisedButton(
-                      //     onPressed: () {
-                      //       // Navigator.pop(context);
-                      //       Navigator.of(context)
-                      //           .pushReplacementNamed(UserHomePage.route);
-                      //           Toast.show("You have Vaccated the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-                      //     },
-                      //     color: Colors.teal[300],
-                      //     //blue[700],
-                      //     shape: RoundedRectangleBorder(
-                      //         borderRadius: BorderRadius.circular(18.0),
-                      //         side: BorderSide(color: Colors.grey)),
-                      //     splashColor: Colors.green,
-                      //     child: Row(
-                      //       children: [
-                      //         Icon(
-                      //           Icons.assignment_turned_in,
-                      //           size: 40.0,
-                      //           color: Colors.black54,
-                      //         ),
-                      //         Text('Vacate', style: TextStyle(fontSize: 25.0)),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
+
                     ],
                   ),
                 ),
@@ -321,6 +299,7 @@ class _ParkingState extends State<Parking> {
                           buildButton("10"),
                           buildButton("11"),
                           buildButton("12"),
+
 
                         ]),
                       ],
