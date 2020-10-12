@@ -21,7 +21,7 @@ class Parking extends StatefulWidget {
 class _ParkingState extends State<Parking> {
   final _auth = FirebaseAuth.instance;
   bool Is_Occupied, Slot_Type, changeColor = false,changeColor1=false;
-  String User_ID, document_id;
+  String User_ID, document_id,Lot_Name;
   int Lot_ID, Slot_ID;
 
   @override
@@ -29,6 +29,7 @@ class _ParkingState extends State<Parking> {
     super.initState();
     getCurrentUser();
     UserHomePage.available=0;
+    Lot_Name=UserHomePage.Lot_name.substring(2);
     availableSlots();
   }
 
@@ -70,6 +71,7 @@ class _ParkingState extends State<Parking> {
     });
 
     print('requested slot occupied successfully');
+    Toast.show("You have Ocuupied the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
   }
 
   //code for vacating a slot
@@ -82,7 +84,7 @@ class _ParkingState extends State<Parking> {
     setState(() {
       changeColor1 = false;
     });
-
+   Toast.show("You have Vacated the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
     print('requested slot vacated successfully');
   }
 
@@ -96,6 +98,7 @@ class _ParkingState extends State<Parking> {
     });
 
     print('requested slot reserved successfully');
+    Toast.show("You have Reserved the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
   }
 
   //get current user
@@ -189,7 +192,7 @@ class _ParkingState extends State<Parking> {
                 alignment: Alignment.center,
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  'Parking Area',
+                  'Parking Area - $Lot_Name',
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 30),
                 ),
               ),
@@ -217,7 +220,7 @@ class _ParkingState extends State<Parking> {
                           onPressed: () {
                             Navigator.of(context)
                                 .pushReplacementNamed(UserHomePage.route);
-                            Toast.show("You have Ocuupied the slot", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+                            
                           },
                           color: Colors.red[400],
                           //blue[700],
@@ -228,11 +231,9 @@ class _ParkingState extends State<Parking> {
                           child: Row(
                             children: [
                               Icon(
-<<<<<<< HEAD
-                                Icons.cancel,
-=======
+
                                 Icons.closed_caption,
->>>>>>> 951886629365b82cf5246b82afb0d4417d466d7c
+
                                 size: 40.0,
                                 color: Colors.black54,
                               ),
