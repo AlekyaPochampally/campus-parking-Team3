@@ -208,50 +208,7 @@ class _ParkingState extends State<Parking> {
               SizedBox(
                 height: 20,
               ),
-              Container(
-
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ButtonTheme(
-                        minWidth: 150.0,
-                        height: 50.0,
-                        child: RaisedButton(
-                          onPressed: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed(UserHomePage.route);
-                            
-                          },
-                          color: Colors.red[400],
-                          //blue[700],
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                              side: BorderSide(color: Colors.grey)),
-                          splashColor: Colors.red,
-                          child: Row(
-                            children: [
-                              Icon(
-
-                                Icons.closed_caption,
-
-                                size: 40.0,
-                                color: Colors.black54,
-                              ),
-                              Text('Cancel', style: TextStyle(fontSize: 25.0)),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
+             
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -315,7 +272,54 @@ class _ParkingState extends State<Parking> {
                 ],
               ),
               SizedBox(
-                height: 40,
+                height: 20,
+              ),
+               Container(
+
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                height: 10,
+              ),
+                      ButtonTheme(
+                        minWidth: 150.0,
+                        height: 50.0,
+                        child: RaisedButton(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushReplacementNamed(UserHomePage.route);
+                            
+                          },
+                          color: Colors.red[400],
+                          //blue[700],
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                              side: BorderSide(color: Colors.grey)),
+                          splashColor: Colors.red,
+                          child: Row(
+                            children: [
+                              Icon(
+
+                                Icons.closed_caption,
+
+                                size: 40.0,
+                                color: Colors.black54,
+                              ),
+                              Text('Cancel', style: TextStyle(fontSize: 25.0)),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
