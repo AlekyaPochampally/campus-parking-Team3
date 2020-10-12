@@ -72,6 +72,8 @@ class _ticketState extends State<ticket> {
     } //updated ticket table
   }
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget buildButton(
       String buttonText, double buttonHeight, Color buttonColor) {
@@ -102,6 +104,8 @@ class _ticketState extends State<ticket> {
     return Scaffold(
         appBar: ApplicationBar(),
         body: SafeArea(
+          child: Form(
+            key: _formKey,
           child: ListView(
             //  mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -130,11 +134,20 @@ class _ticketState extends State<ticket> {
                     border: OutlineInputBorder(),
                     labelText: 'Vehicle Number',
                   ),
-                  onChanged: (value) {
-                    vehicleNum = value;
-                  },
+                  validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Vehicle number cannot be empty';
+                                      }
+                                      _formKey.currentState.save();
+                                      return null;
+                                    },
+                  onChanged: (value) => 
+                     setState(() => vehicleNum = value),
                 ),
               ),
+              //     },
+              //   ),
+              // ),
               Container(
                 padding: EdgeInsets.all(10),
                 child: TextFormField(
@@ -142,11 +155,18 @@ class _ticketState extends State<ticket> {
                     border: OutlineInputBorder(),
                     labelText: 'Reason for ticket',
                   ),
-                  onChanged: (value) {
-                    reason = value;
-                  },
+                   validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Reason cannot be empty';
+                                      }
+                                      _formKey.currentState.save();
+                                      return null;
+                                    },
+                  onChanged: (value) => 
+                     setState(() => vehicleNum = value),
                 ),
               ),
+          
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -184,10 +204,10 @@ class _ticketState extends State<ticket> {
                       child: RaisedButton(
                         onPressed: () {
                           // Navigator.pop(context);
-                          
+                          if (_formKey.currentState.validate()) {
                           Ticket(vehicleNum, reason, action);
                           Navigator.of(context).pushReplacementNamed(UserHomePage.route);
-                          
+                          }
                         },
                         color: Colors.teal[400],
                         //blue[700],
@@ -230,6 +250,6 @@ class _ticketState extends State<ticket> {
               ),
             ],
           ),
-        ));
+        )));
   }
 }

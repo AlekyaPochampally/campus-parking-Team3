@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:toast/toast.dart';
 import 'package:campusparking/ui/widgets/app_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:campusparking/ui/pages/user_home_page.dart';
@@ -40,8 +40,10 @@ class _reportPageState extends State<reportPage> {
         .collection('User')
         .document(docId);
         break;
+        
       } else
       print('Invaild vehicle number');
+      Toast.show("Invaild Vehicle Number", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
     }
   }
 
