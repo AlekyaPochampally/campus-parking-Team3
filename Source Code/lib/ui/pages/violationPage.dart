@@ -297,7 +297,7 @@ class ViolationPageState extends State<ViolationPage> {
                                              });
                                             Navigator.of(context)
                                                 .pushReplacementNamed(
-                                                    UserHomePage.route);
+                                                    ViolationPage.route);
                                           }
                                         },
                                         color: Colors.lightBlue,
@@ -334,7 +334,7 @@ class ViolationPageState extends State<ViolationPage> {
                                         onPressed: () {
                                           Navigator.of(context)
                                               .pushReplacementNamed(
-                                                  ViolationPage.route);
+                                                  UserHomePage.route);
                                         },
                                         color: Colors.red,
                                         shape: RoundedRectangleBorder(

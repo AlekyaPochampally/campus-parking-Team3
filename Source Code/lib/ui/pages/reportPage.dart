@@ -202,7 +202,7 @@ class _reportPageState extends State<reportPage> {
                               'Description': description,
                              });
                                 Navigator.of(context)
-                                  .pushReplacementNamed(UserHomePage.route);
+                                  .pushReplacementNamed(reportPage.route);
                               }
                               },
                               color: Colors.lightBlue,
@@ -233,7 +233,7 @@ class _reportPageState extends State<reportPage> {
                             height: 45.0,
                             child: RaisedButton(
                               onPressed: () {
-                                Navigator.of(context).pushReplacementNamed(reportPage.route);
+                                Navigator.of(context).pushReplacementNamed(UserHomePage.route);
                               },
                               color: Colors.red,
                               shape: RoundedRectangleBorder(
