@@ -223,7 +223,7 @@ class _ParkingState extends State<Parking> {
                           child: Row(
                             children: [
                               Icon(
-                                Icons.close_rounded,
+                                Icons.closed_caption,
                                 size: 40.0,
                                 color: Colors.black54,
                               ),

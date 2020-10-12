@@ -6,6 +6,7 @@ import 'package:campusparking/ui/widgets/app_bar.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:toast/toast.dart';
 
 final _firestore = Firestore.instance;
 
@@ -35,9 +36,13 @@ class _ticketState extends State<ticket> {
           docId = user.documentID;
          // print(UID);
           if (action)
-            tickets = user.data['Num_Tickets'] + 1; //adding new ticket
+         { tickets = user.data['Num_Tickets'] + 1; //adding new ticket
+           Toast.show("Successfully Raised a ticket", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+         }
           else
-            tickets = user.data['Num_Tickets'] - 1; //removing ticket
+           { tickets = user.data['Num_Tickets'] - 1; //removing ticket
+             Toast.show("Successfully Droped a ticket", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+           }
          // print('tickets $tickets');
           _firestore
               .collection('User')
@@ -48,6 +53,8 @@ class _ticketState extends State<ticket> {
           //user.data.update('Num_Tickets', (tickets) => null);
         } else
           print('invalid vehicle number');
+          Toast.show("Invalid Vehicle number", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+
     }
 
 
@@ -156,6 +163,7 @@ class _ticketState extends State<ticket> {
                       icons: [Icons.check, Icons.close],
                       onToggle: (index) {
                         print('switched to: $index');
+                        
                         if (index == 0)
                           action = true;
                         else
@@ -176,7 +184,10 @@ class _ticketState extends State<ticket> {
                       child: RaisedButton(
                         onPressed: () {
                           // Navigator.pop(context);
+                          
                           Ticket(vehicleNum, reason, action);
+                          
+                          
                         },
                         color: Colors.teal[400],
                         //blue[700],
