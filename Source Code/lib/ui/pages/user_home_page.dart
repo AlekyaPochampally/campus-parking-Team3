@@ -115,7 +115,7 @@ class _UserHomePageState extends State<UserHomePage> {
                               color: Colors.blueGrey,
                               onPressed: () async {
                                 UserHomePage.Lot_name = 'PA2';
-                                //Navigator.of(context).pushReplacementNamed(Parking.route);
+                                Navigator.of(context).pushReplacementNamed(Parking.route);
                               },
                               child: Text('Parking lot 2',
                                   style: TextStyle(fontSize: 25.0)),
@@ -138,7 +138,7 @@ class _UserHomePageState extends State<UserHomePage> {
                               color: Colors.blueGrey,
                               onPressed: () async {
                                 UserHomePage.Lot_name = 'PA3';
-                                // Navigator.of(context).pushReplacementNamed(Parking.route);
+                                 Navigator.of(context).pushReplacementNamed(Parking.route);
                               },
                               child: Text('Parking lot 3',
                                   style: TextStyle(fontSize: 25.0)),
@@ -161,7 +161,7 @@ class _UserHomePageState extends State<UserHomePage> {
                               color: Colors.blueGrey,
                               onPressed: () async {
                                 UserHomePage.Lot_name = 'PA4';
-                                //  Navigator.of(context).pushReplacementNamed(Parking.route);
+                                Navigator.of(context).pushReplacementNamed(Parking.route);
                               },
                               child: Text('Parking lot 4',
                                   style: TextStyle(fontSize: 25.0)),
