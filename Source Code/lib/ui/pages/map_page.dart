@@ -30,7 +30,7 @@ class _mapPageState extends State<mapPage> {
           draggable: false,
           infoWindow: InfoWindow(
             title: element.lotNumber,
-            snippet: element.availableParkingLots.toString(),
+            snippet: element.lotaddress,
           ),
           position: element.locationCoords));
     });

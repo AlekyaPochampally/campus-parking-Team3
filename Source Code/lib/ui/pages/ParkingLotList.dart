@@ -48,13 +48,13 @@ final List<ParkingLot> lots = [
   ),
   ParkingLot(
     lotNumber: 'Lot4',
-    lotaddress: 'Wellness Center',
+    lotaddress: 'Charging Pot Parking lot ',
     availableParkingLots: UserHomePage.available,
     totalParkingLots: '30',
     // thumbNail:
     // 'https://lh5.googleusercontent.com/p/AF1QipNNzoa4RVMeOisc0vQ5m3Z7aKet5353lu0Aah0a=w90-h90-n-k-no'
     //,
-    locationCoords: LatLng(40.351528, -94.889182),
+    locationCoords: LatLng(40.351838, -94.886817),
   ),
   ParkingLot(
     lotNumber: 'Lot5',
