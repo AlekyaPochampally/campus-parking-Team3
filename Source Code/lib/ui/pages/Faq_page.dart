@@ -61,8 +61,9 @@ class _FaQPageState extends State<FaQPage> {
                                   child: Text(
                                     'You may find your question below.',
                                     style: TextStyle(
-                                        fontWeight: FontWeight.w600, fontSize: 23),
+                                fontSize: 20),
                                   ),
+                                  
                                 ),
                           // Text('\n\nYou may find your question below.'),
                           FlatButton(
@@ -73,20 +74,10 @@ class _FaQPageState extends State<FaQPage> {
                                       title:
                                           Text("Q: Can't access your account?"),
                                       content: Text(
-                                          "A: Check your network connection or call 123-321 4567 for help."), 
+                                          "A: Check your network connection or call 123-321 4567 for help."),
                                     );
-                                  }),),
-                                  Container(
-                                  alignment: Alignment.center,
-                                  padding: EdgeInsets.all(1),
-                                  child: Text(
-                                    '1. Cannot access your account?.',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600, fontSize: 20),
-                                  ),
-                                ),
-                              //child: Text('1. Can\'t access your account?')),
-                              
+                                  }),
+                              child: Text('1. Can\'t access your account?')),
                           FlatButton(
                               onPressed: () => showDialog(
                                   context: context,
@@ -96,17 +87,8 @@ class _FaQPageState extends State<FaQPage> {
                                       content: Text(
                                           "A: Login page -> forget password or call 123-321 4567 for help."),
                                     );
-                                  }),),
-                                  Container(
-                                  alignment: Alignment.center,
-                                  padding: EdgeInsets.all(1),
-                                  child: Text(
-                                    '2. How to reset password?',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600, fontSize: 20),
-                                  ),
-                                ),
-                             // child: Text('2. How to reset password?')),
+                                  }),
+                              child: Text('2. How to reset password?')),
                           FlatButton(
                               onPressed: () => showDialog(
                                   context: context,
@@ -116,17 +98,8 @@ class _FaQPageState extends State<FaQPage> {
                                       content: Text(
                                           "A: login your account then go to park page choose an avaible slot, park your vehicle there then press finish parking button, or call 123-321 4567 for more help."),
                                     );
-                                  }),),
-                                  Container(
-                                  alignment: Alignment.center,
-                                  padding: EdgeInsets.all(1),
-                                  child: Text(
-                                    '3. How to park my vehicle?',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600, fontSize: 20),
-                                  ),
-                                ),
-                              // child: Text('3. How to park my vehicle?'))
+                                  }),
+                              child: Text('3. How to park my vehicle?'))
                         ],
                       ))
                     ])))));
