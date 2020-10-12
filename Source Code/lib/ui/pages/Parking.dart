@@ -141,7 +141,7 @@ class _ParkingState extends State<Parking> {
         } else {
           print("This user is not allowed to perform the action " +
               loggedInUser.email);
-          Toast.show("Someone else already occupied this slot", context,
+          Toast.show("Someone else have already occupied this slot", context,
               duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
         }
       }

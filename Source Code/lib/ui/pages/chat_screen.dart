@@ -75,7 +75,7 @@ class _ChatScreenState extends State<ChatScreen> {
               alignment: Alignment.center,
               padding: EdgeInsets.all(10),
               child: Text(
-                'Get immidiate assistance by aksing your query in below chat window',
+                'Get immidiate assistance by asking your query in below chat window',
            //     style: TextStyle(fontSize: 20),
               ),
             ),
