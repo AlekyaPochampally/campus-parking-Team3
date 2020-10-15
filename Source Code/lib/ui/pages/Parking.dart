@@ -180,10 +180,33 @@ class _ParkingState extends State<Parking> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext   context) {
     bool added = false;
     return Scaffold(
-        appBar: ApplicationBar(),
+        appBar: AppBar(
+    title: Row(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          child: Container(
+            height: 35.0,
+            width: 35.0,
+            child: Image.asset('assets/images/nwm_logo.png')
+          ),
+        ),
+        Text("Campus Parking"),
+      ],
+    ),
+     leading: new IconButton(
+    icon: new Icon(Icons.arrow_back),
+    onPressed: () {
+      Navigator.of(context)
+                                .pushReplacementNamed(UserHomePage.route);
+      
+    },
+  ),
+  ),
+        
         body: SafeArea(
           child: ListView(
             //  mainAxisAlignment: MainAxisAlignment.center,
