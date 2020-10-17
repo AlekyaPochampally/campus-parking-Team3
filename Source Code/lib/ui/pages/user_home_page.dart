@@ -30,7 +30,7 @@ class _UserHomePageState extends State<UserHomePage> {
   //static  int Lot_ID;
   final _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
-
+  static bool autho=false;
   @override
   void initState() {
     super.initState();
@@ -41,12 +41,28 @@ class _UserHomePageState extends State<UserHomePage> {
     try {
       final user = await _auth.currentUser();
       if (user != null) loggedInUser = user;
-      print(loggedInUser.email);
+      {
+        isVisible(user);
+        print(loggedInUser.email);
+      }
     } catch (e) {
       print(e);
     }
   }
+  void isVisible(FirebaseUser user) async
+  { print("is visible is called");
+    final users = await _firestore.collection('User').getDocuments();
+    for (var user in users.documents) {
+      if (user.data['User_ID'] == loggedInUser.email) {
+        if (user.data['Type'] == 'Admin')
+          autho= true;
+        else
+          autho= false;
+      }
 
+    }
+    print("autho: ${autho}");
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -221,9 +237,8 @@ class _UserHomePageState extends State<UserHomePage> {
                   () => {Navigator.of(context).pushNamed(ChatScreen.route)}),
               CustomeListTile(Icons.phone, 'Contact',
                   () => {Navigator.of(context).pushNamed(ContactUs.route)}),
-              CustomeListTile(Icons.gavel, 'Ticket',
-                  () => {Navigator.of(context).pushNamed(ticket.route)}), //Navigator.of(context).pushNamed(ticket.route)
-              // CustomeListTile(Icons.report, 'Violation', () => {Navigator.of(context).pushNamed(ViolationPage.route)}),
+              CustomeListTileNew(Icons.gavel, 'Ticket',
+                  () => {Navigator.of(context).pushNamed(ticket.route)}),
               CustomeListTile(Icons.lock, 'Logout', () async {
                 final user = await _auth.signOut();
                 Navigator.of(context).pushNamed(LoginPage.route);
@@ -265,6 +280,55 @@ class CustomeListTile extends StatelessWidget {
         child: InkWell(
           splashColor: Colors.blueGrey,
           onTap: onTap,
+          child: Container(
+            height: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Icon(icon),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(text, style: TextStyle(fontSize: 16.0)),
+                    ),
+                  ],
+                ),
+                Icon(Icons.arrow_right)
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+class CustomeListTileNew extends StatelessWidget {
+  IconData icon;
+  String text,route;
+  Function onTap;
+  CustomeListTileNew(this.icon, this.text, this.onTap);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(color: Colors.grey.shade400))),
+        child: InkWell(
+          splashColor: Colors.blueGrey,
+          onTap:() =>   {
+            if(_UserHomePageState.autho)
+
+              Navigator.of(context).pushNamed(ticket.route)
+            else
+              Navigator.pushNamed(context,UserHomePage.route)
+
+          },
+
+
+
           child: Container(
             height: 50,
             child: Row(

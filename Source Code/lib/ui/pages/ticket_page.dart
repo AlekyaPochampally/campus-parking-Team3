@@ -8,8 +8,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:toast/toast.dart';
 
-final _firestore = Firestore.instance;
 
+
+final _firestore = Firestore.instance;
+FirebaseUser loggedInUser;
 class ticket extends StatefulWidget {
   static const String route = '/ticket';
 
@@ -18,9 +20,21 @@ class ticket extends StatefulWidget {
 }
 
 class _ticketState extends State<ticket> {
+  final _auth = FirebaseAuth.instance;
+  bool autho=false;
   @override
   void initState() {
-    super.initState();
+    getCurrentUser();
+
+  }
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser();
+      if (user != null) loggedInUser = user;
+      print(loggedInUser.email);
+    } catch (e) {
+      print(e);
+    }
   }
 
   void Ticket(String regNumber, String reason, bool action) async {
