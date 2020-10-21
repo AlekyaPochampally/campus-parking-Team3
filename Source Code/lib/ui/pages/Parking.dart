@@ -86,7 +86,7 @@ class _ParkingState extends State<Parking> {
       changeColor1 = false;
     });
     Toast.show("You have Vacated the slot", context,
-        duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     print('requested slot vacated successfully');
   }
 
@@ -101,7 +101,7 @@ class _ParkingState extends State<Parking> {
 
     print('requested slot reserved successfully');
     Toast.show("You have Reserved the slot", context,
-        duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
   }
 
   //get current user
@@ -132,6 +132,7 @@ class _ParkingState extends State<Parking> {
       //   {
       if (!data['Is_Occupied']) {
         occupySlot();
+        
 
         break;
       } else {
@@ -149,23 +150,29 @@ class _ParkingState extends State<Parking> {
   }
 
   Widget buildButton(String buttonText) {
-    bool added = false;
+    
+    
     return Container(
       child: GestureDetector(
-        child: FlatButton(
+        child: RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(0.0),
                 side: BorderSide(
                     color: Colors.white, width: 2, style: BorderStyle.solid)),
             padding: EdgeInsets.all(16.0),
-            color: changeColor ? Colors.redAccent : Colors.lightBlueAccent,
+            color: _hasBeenPressed ? Colors.red[300] : Colors.green[300],
             //Colors.lightBlueAccent,
             onLongPress: () {
               reserveSlot(buttonText);
             },
+            
             onPressed: () => {
                   //  setState(() {
                   buttonPressed(buttonText),
+                  setState(() {
+                  _hasBeenPressed = !_hasBeenPressed;
+                  
+                })
                   // }),
                 },
             child: Text(
@@ -178,10 +185,23 @@ class _ParkingState extends State<Parking> {
       ),
     );
   }
+bool _hasBeenPressed = false;
+bool _hasBeenPressed1 = false;
+bool _hasBeenPressed2 = false;
+bool _hasBeenPressed3 = false;
+bool _hasBeenPressed4 = false;
+bool _hasBeenPressed5 = false;
+bool _hasBeenPressed6 = false;
+bool _hasBeenPressed7 = false;
+bool _hasBeenPressed8 = false;
+bool _hasBeenPressed9 = false;
+bool _hasBeenPressed10 = false;
+bool _hasBeenPressed11 = false;
+bool _hasBeenPressed12 = false;
 
   @override
   Widget build(BuildContext   context) {
-    bool added = false;
+    
     return Scaffold(
         appBar: AppBar(
     title: Row(
@@ -214,7 +234,7 @@ class _ParkingState extends State<Parking> {
               Align(
                 alignment: Alignment.topRight,
                 child: Tooltip(
-                  message: 'Long Press for Reserve \n Press for vacate and occupy',
+                  message: 'Long Press for Reserve \n\n Press for vacate and occupy',
                   child: FlatButton(
                     child: Icon(Icons.help),
                   ),
@@ -275,23 +295,396 @@ class _ParkingState extends State<Parking> {
                     child: Table(
                       children: [
                         TableRow(children: [
-                          buildButton("1"),
-                          buildButton("2"),
-                          buildButton("3"),
-                          buildButton("4"),
+                           Container(
+      child: GestureDetector(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0.0),
+                side: BorderSide(
+                    color: Colors.white, width: 2, style: BorderStyle.solid)),
+            padding: EdgeInsets.all(16.0),
+            color: _hasBeenPressed1 ? Colors.red[300] : Colors.green[300],
+            //Colors.lightBlueAccent,
+            onLongPress: () {
+              reserveSlot("1");
+            },
+            
+            onPressed: () => {
+                  //  setState(() {
+                  buttonPressed("1"),
+                  setState(() {
+                  _hasBeenPressed1 = !_hasBeenPressed1;
+                  
+                })
+                  // }),
+                },
+            child: Text(
+              "1",
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white),
+            )),
+      ),
+    ),
+                          Container(
+      child: GestureDetector(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0.0),
+                side: BorderSide(
+                    color: Colors.white, width: 2, style: BorderStyle.solid)),
+            padding: EdgeInsets.all(16.0),
+            color: _hasBeenPressed2 ? Colors.red[300] : Colors.green[300],
+            //Colors.lightBlueAccent,
+            onLongPress: () {
+              reserveSlot("2");
+            },
+            
+            onPressed: () => {
+                  //  setState(() {
+                  buttonPressed("2"),
+                  setState(() {
+                  _hasBeenPressed2 = !_hasBeenPressed2;
+                  
+                })
+                  // }),
+                },
+            child: Text(
+              "2",
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white),
+            )),
+      ),
+    ),
+                          Container(
+      child: GestureDetector(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0.0),
+                side: BorderSide(
+                    color: Colors.white, width: 2, style: BorderStyle.solid)),
+            padding: EdgeInsets.all(16.0),
+            color: _hasBeenPressed3 ? Colors.red[300] : Colors.green[300],
+            //Colors.lightBlueAccent,
+            onLongPress: () {
+              reserveSlot("3");
+            },
+            
+            onPressed: () => {
+                  //  setState(() {
+                  buttonPressed("3"),
+                  setState(() {
+                  _hasBeenPressed3 = !_hasBeenPressed3;
+                  
+                })
+                  // }),
+                },
+            child: Text(
+              "3",
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white),
+            )),
+      ),
+    ),
+                          Container(
+      child: GestureDetector(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0.0),
+                side: BorderSide(
+                    color: Colors.white, width: 2, style: BorderStyle.solid)),
+            padding: EdgeInsets.all(16.0),
+            color: _hasBeenPressed4 ? Colors.red[300] : Colors.green[300],
+            //Colors.lightBlueAccent,
+            onLongPress: () {
+              reserveSlot("4");
+            },
+            
+            onPressed: () => {
+                  //  setState(() {
+                  buttonPressed("4"),
+                  setState(() {
+                  _hasBeenPressed4 = !_hasBeenPressed4;
+                  
+                })
+                  // }),
+                },
+            child: Text(
+              "4",
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white),
+            )),
+      ),
+    ),
                         ]),
                         TableRow(children: [
-                          buildButton("5"),
-                          buildButton("6"),
-                          buildButton("7"),
-                          buildButton("8"),
+                          Container(
+      child: GestureDetector(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0.0),
+                side: BorderSide(
+                    color: Colors.white, width: 2, style: BorderStyle.solid)),
+            padding: EdgeInsets.all(16.0),
+            color: _hasBeenPressed5 ? Colors.red[300] : Colors.green[300],
+            //Colors.lightBlueAccent,
+            onLongPress: () {
+              reserveSlot("5");
+            },
+            
+            onPressed: () => {
+                  //  setState(() {
+                  buttonPressed("5"),
+                  setState(() {
+                  _hasBeenPressed5 = !_hasBeenPressed5;
+                  
+                })
+                  // }),
+                },
+            child: Text(
+              "5",
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white),
+            )),
+      ),
+    ),
+                          Container(
+      child: GestureDetector(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0.0),
+                side: BorderSide(
+                    color: Colors.white, width: 2, style: BorderStyle.solid)),
+            padding: EdgeInsets.all(16.0),
+            color: _hasBeenPressed6 ? Colors.red[300] : Colors.green[300],
+            //Colors.lightBlueAccent,
+            onLongPress: () {
+              reserveSlot("6");
+            },
+            
+            onPressed: () => {
+                  //  setState(() {
+                  buttonPressed("6"),
+                  setState(() {
+                  _hasBeenPressed6 = !_hasBeenPressed6;
+                  
+                })
+                  // }),
+                },
+            child: Text(
+              "6",
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white),
+            )),
+      ),
+    ),
+                          Container(
+      child: GestureDetector(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0.0),
+                side: BorderSide(
+                    color: Colors.white, width: 2, style: BorderStyle.solid)),
+            padding: EdgeInsets.all(16.0),
+            color: _hasBeenPressed7 ? Colors.red[300] : Colors.green[300],
+            //Colors.lightBlueAccent,
+            onLongPress: () {
+              reserveSlot("7");
+            },
+            
+            onPressed: () => {
+                  //  setState(() {
+                  buttonPressed("7"),
+                  setState(() {
+                  _hasBeenPressed7 = !_hasBeenPressed7;
+                  
+                })
+                  // }),
+                },
+            child: Text(
+              "7",
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white),
+            )),
+      ),
+    ),
+                          Container(
+      child: GestureDetector(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0.0),
+                side: BorderSide(
+                    color: Colors.white, width: 2, style: BorderStyle.solid)),
+            padding: EdgeInsets.all(16.0),
+            color: _hasBeenPressed8 ? Colors.red[300] : Colors.green[300],
+            //Colors.lightBlueAccent,
+            onLongPress: () {
+              reserveSlot("8");
+            },
+            
+            onPressed: () => {
+                  //  setState(() {
+                  buttonPressed("8"),
+                  setState(() {
+                  _hasBeenPressed8 = !_hasBeenPressed8;
+                  
+                })
+                  // }),
+                },
+            child: Text(
+              "8",
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white),
+            )),
+      ),
+    ),
                         ]),
                         TableRow(children: [
-                          buildButton("9"),
-                          buildButton("10"),
-                          buildButton("11"),
-                          buildButton("12"),
+                          Container(
+      child: GestureDetector(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0.0),
+                side: BorderSide(
+                    color: Colors.white, width: 2, style: BorderStyle.solid)),
+            padding: EdgeInsets.all(16.0),
+            color: _hasBeenPressed9 ? Colors.red[300] : Colors.green[300],
+            //Colors.lightBlueAccent,
+            onLongPress: () {
+              reserveSlot("9");
+            },
+            
+            onPressed: () => {
+                  //  setState(() {
+                  buttonPressed("9"),
+                  setState(() {
+                  _hasBeenPressed9 = !_hasBeenPressed9;
+                  
+                })
+                  // }),
+                },
+            child: Text(
+              "9",
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white),
+            )),
+      ),
+    ),
+                          Container(
+      child: GestureDetector(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0.0),
+                side: BorderSide(
+                    color: Colors.white, width: 2, style: BorderStyle.solid)),
+            padding: EdgeInsets.all(16.0),
+            color: _hasBeenPressed10 ? Colors.red[300] : Colors.green[300],
+            //Colors.lightBlueAccent,
+            onLongPress: () {
+              reserveSlot("10");
+            },
+            
+            onPressed: () => {
+                  //  setState(() {
+                  buttonPressed("10"),
+                  setState(() {
+                  _hasBeenPressed10 = !_hasBeenPressed10;
+                  
+                })
+                  // }),
+                },
+            child: Text(
+              "10",
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white),
+            )),
+      ),
+    ),
+                          Container(
+      child: GestureDetector(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0.0),
+                side: BorderSide(
+                    color: Colors.white, width: 2, style: BorderStyle.solid)),
+            padding: EdgeInsets.all(16.0),
+            color: _hasBeenPressed11 ? Colors.red[300] : Colors.green[300],
+            //Colors.lightBlueAccent,
+            onLongPress: () {
+              reserveSlot("11");
+            },
+            
+            onPressed: () => {
+                  //  setState(() {
+                  buttonPressed("11"),
+                  setState(() {
+                  _hasBeenPressed11 = !_hasBeenPressed11;
+                  
+                })
+                  // }),
+                },
+            child: Text(
+              "11",
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white),
+            )),
+      ),
+    ),
+                          Container(
+      child: GestureDetector(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0.0),
+                side: BorderSide(
+                    color: Colors.white, width: 2, style: BorderStyle.solid)),
+            padding: EdgeInsets.all(16.0),
+            color: _hasBeenPressed12 ? Colors.red[300] : Colors.green[300],
+            //Colors.lightBlueAccent,
+            onLongPress: () {
+              reserveSlot("12");
+            },
+            
+            onPressed: () => {
+                  //  setState(() {
+                  buttonPressed("12"),
+                  setState(() {
+                  _hasBeenPressed12 = !_hasBeenPressed12;
+                  
+                })
+                  // }),
+                },
+            child: Text(
+              "12",
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white),
+            )),
+      ),
+    ),
                         ]),
+                        
                       ],
                     ),
                   )
@@ -342,6 +735,7 @@ class _ParkingState extends State<Parking> {
               SizedBox(
                 height: 20,
               ),
+             
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

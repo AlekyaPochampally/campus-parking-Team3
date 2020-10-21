@@ -323,8 +323,11 @@ class CustomeListTileNew extends StatelessWidget {
 
               Navigator.of(context).pushNamed(ticket.route)
             else
-              Navigator.pushNamed(context,UserHomePage.route)
-
+            {
+              Navigator.pushNamed(context,UserHomePage.route),
+               Toast.show("Logged out Successfully", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM),
+              
+            }
           },
 
 
