@@ -1,79 +1,38 @@
+import 'package:flutter/foundation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:campusparking/ui/pages/user_home_page.dart';
 
 class ParkingLot {
-  String lotNumber;
-  String lotaddress;
+  String lotName;
   int availableParkingLots;
-  String totalParkingLots;
-  String thumbNail;
   LatLng locationCoords;
+  
+  void set availableSlots(int slots) {
+    availableParkingLots = slots;
+  }
 
-  ParkingLot(
-      {this.lotNumber,
-      this.lotaddress,
-      this.availableParkingLots,
-      this.totalParkingLots,
-      this.thumbNail,
-      this.locationCoords});
+  ParkingLot({this.lotName, this.availableParkingLots, this.locationCoords});
 }
 
-final List<ParkingLot> lots = [
+List<ParkingLot> lots = [
   ParkingLot(
-    lotNumber: 'Lot1',
-    lotaddress: 'Olive Deluce',
-    availableParkingLots: UserHomePage.available,
-    totalParkingLots: '20',
-    locationCoords: LatLng(40.348806, -94.88442),
-    // thumbNail:
-    //'https://lh5.googleusercontent.com/p/AF1QipNNzoa4RVMeOisc0vQ5m3Z7aKet5353lu0Aah0a=w90-h90-n-k-no'
-  ),
-  ParkingLot(
-    lotNumber: 'Lot2',
-    lotaddress: 'Olive Deluce',
-    availableParkingLots: UserHomePage.available,
-    totalParkingLots: '30',
-    // thumbNail:
-    // 'https://lh5.googleusercontent.com/p/AF1QipNNzoa4RVMeOisc0vQ5m3Z7aKet5353lu0Aah0a=w90-h90-n-k-no',
+    lotName: 'PA1',
+    availableParkingLots: UserHomePage.parkingLot1,
     locationCoords: LatLng(40.34841, -94.884125),
   ),
   ParkingLot(
-    lotNumber: 'Lot3',
-    lotaddress: 'Wellness Center',
-    availableParkingLots: UserHomePage.available,
-    totalParkingLots: '30',
-    //thumbNail:
-    //'https://lh5.googleusercontent.com/p/AF1QipNNzoa4RVMeOisc0vQ5m3Z7aKet5353lu0Aah0a=w90-h90-n-k-no',
+    lotName: 'PA2',
+    availableParkingLots: UserHomePage.parkingLot2,
     locationCoords: LatLng(40.355160, -94.890433),
   ),
   ParkingLot(
-    lotNumber: 'Lot4',
-    lotaddress: 'Charging Pot Parking lot ',
-    availableParkingLots: UserHomePage.available,
-    totalParkingLots: '30',
-    // thumbNail:
-    // 'https://lh5.googleusercontent.com/p/AF1QipNNzoa4RVMeOisc0vQ5m3Z7aKet5353lu0Aah0a=w90-h90-n-k-no'
-    //,
+    lotName: 'PA3',
+    availableParkingLots: UserHomePage.parkingLot3,
     locationCoords: LatLng(40.351838, -94.886817),
   ),
   ParkingLot(
-    lotNumber: 'Lot5',
-    lotaddress: 'Admin Building Parking lot',
-    availableParkingLots: UserHomePage.available,
-    totalParkingLots: '30',
-    // thumbNail:
-    // 'https://lh5.googleusercontent.com/p/AF1QipNNzoa4RVMeOisc0vQ5m3Z7aKet5353lu0Aah0a=w90-h90-n-k-no'
-    //,
-    locationCoords: LatLng(40.355605, -94.883010),
-  ),
-  ParkingLot(
-    lotNumber: 'Lot6',
-    lotaddress: 'Facility Services East',
-    availableParkingLots: UserHomePage.available,
-    totalParkingLots: '30',
-    // thumbNail:
-    // 'https://lh5.googleusercontent.com/p/AF1QipNNzoa4RVMeOisc0vQ5m3Z7aKet5353lu0Aah0a=w90-h90-n-k-no'
-    //,
+    lotName: 'PA4',
+    availableParkingLots: UserHomePage.parkingLot4,
     locationCoords: LatLng(40.354085, -94.880663),
   ),
 ];
