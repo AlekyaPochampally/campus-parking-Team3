@@ -22,19 +22,32 @@ class UserHomePage extends StatefulWidget {
   static const String route = '/user-home';
   static String Lot_name;
   static int available = 00;
+  static int parkingLot1 = 00;
+  static int parkingLot2 = 00;
+  static int parkingLot3 = 00;
+  static int parkingLot4 = 00;
+  static var snapshotGlobal;
   @override
   _UserHomePageState createState() => _UserHomePageState();
+}
+
+getLatestDataFromDb() async {
+  await for (var snapshot in _firestore.collection('slot').snapshots()) {
+    UserHomePage.snapshotGlobal = snapshot;
+    print('loading data from db');
+  }
 }
 
 class _UserHomePageState extends State<UserHomePage> {
   //static  int Lot_ID;
   final _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
-  static bool autho=false;
+  static bool autho = false;
   @override
   void initState() {
     super.initState();
     getCurrentUser();
+    getLatestDataFromDb();
   }
 
   void getCurrentUser() async {
@@ -49,20 +62,21 @@ class _UserHomePageState extends State<UserHomePage> {
       print(e);
     }
   }
-  void isVisible(FirebaseUser user) async
-  { print("is visible is called");
+
+  void isVisible(FirebaseUser user) async {
+    print("is visible is called");
     final users = await _firestore.collection('User').getDocuments();
     for (var user in users.documents) {
       if (user.data['User_ID'] == loggedInUser.email) {
         if (user.data['Type'] == 'Admin')
-          autho= true;
+          autho = true;
         else
-          autho= false;
+          autho = false;
       }
-
     }
     print("autho: ${autho}");
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,7 +115,8 @@ class _UserHomePageState extends State<UserHomePage> {
                               color: Colors.blueGrey,
                               onPressed: () async {
                                 UserHomePage.Lot_name = 'PA1';
-                                Navigator.of(context).pushReplacementNamed(Parking.route);
+                                Navigator.of(context)
+                                    .pushReplacementNamed(Parking.route);
                               },
                               child: Text('Parking lot 1',
                                   style: TextStyle(fontSize: 25.0)),
@@ -131,7 +146,8 @@ class _UserHomePageState extends State<UserHomePage> {
                               color: Colors.blueGrey,
                               onPressed: () async {
                                 UserHomePage.Lot_name = 'PA2';
-                                Navigator.of(context).pushReplacementNamed(Parking.route);
+                                Navigator.of(context)
+                                    .pushReplacementNamed(Parking.route);
                               },
                               child: Text('Parking lot 2',
                                   style: TextStyle(fontSize: 25.0)),
@@ -154,7 +170,8 @@ class _UserHomePageState extends State<UserHomePage> {
                               color: Colors.blueGrey,
                               onPressed: () async {
                                 UserHomePage.Lot_name = 'PA3';
-                                 Navigator.of(context).pushReplacementNamed(Parking.route);
+                                Navigator.of(context)
+                                    .pushReplacementNamed(Parking.route);
                               },
                               child: Text('Parking lot 3',
                                   style: TextStyle(fontSize: 25.0)),
@@ -177,7 +194,8 @@ class _UserHomePageState extends State<UserHomePage> {
                               color: Colors.blueGrey,
                               onPressed: () async {
                                 UserHomePage.Lot_name = 'PA4';
-                                Navigator.of(context).pushReplacementNamed(Parking.route);
+                                Navigator.of(context)
+                                    .pushReplacementNamed(Parking.route);
                               },
                               child: Text('Parking lot 4',
                                   style: TextStyle(fontSize: 25.0)),
@@ -227,11 +245,15 @@ class _UserHomePageState extends State<UserHomePage> {
                   )),
               CustomeListTile(Icons.person, 'Profile',
                   () => {Navigator.of(context).pushNamed(profilePage.route)}),
-              CustomeListTile(Icons.map, 'Map',
-                  () => {Navigator.of(context).pushNamed(mapPage.route)}), //mapPage
+              CustomeListTile(
+                  Icons.map,
+                  'Map',
+                  () => {
+                        Navigator.of(context).pushNamed(mapPage.route)
+                      }), //mapPage
               CustomeListTile(Icons.report, 'Report',
                   () => {Navigator.of(context).pushNamed(reportPage.route)}),
-              CustomeListTile(Icons.question_answer, 'FAQ', 
+              CustomeListTile(Icons.question_answer, 'FAQ',
                   () => {Navigator.of(context).pushNamed(FaQPage.route)}),
               CustomeListTile(Icons.chat, 'Live Chat',
                   () => {Navigator.of(context).pushNamed(ChatScreen.route)}),
@@ -242,7 +264,8 @@ class _UserHomePageState extends State<UserHomePage> {
               CustomeListTile(Icons.lock, 'Logout', () async {
                 final user = await _auth.signOut();
                 Navigator.of(context).pushNamed(LoginPage.route);
-                Toast.show("Logged out Successfully", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+                Toast.show("Logged out Successfully", context,
+                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               }),
               // () => {Navigator.of(context).pushNamed(LoginPage.route)}),
 
@@ -303,9 +326,10 @@ class CustomeListTile extends StatelessWidget {
     );
   }
 }
+
 class CustomeListTileNew extends StatelessWidget {
   IconData icon;
-  String text,route;
+  String text, route;
   Function onTap;
   CustomeListTileNew(this.icon, this.text, this.onTap);
 
@@ -318,20 +342,16 @@ class CustomeListTileNew extends StatelessWidget {
             border: Border(bottom: BorderSide(color: Colors.grey.shade400))),
         child: InkWell(
           splashColor: Colors.blueGrey,
-          onTap:() =>   {
-            if(_UserHomePageState.autho)
-
+          onTap: () => {
+            if (_UserHomePageState.autho)
               Navigator.of(context).pushNamed(ticket.route)
             else
-            {
-              Navigator.pushNamed(context,UserHomePage.route),
-               Toast.show("Logged out Successfully", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM),
-              
-            }
+              {
+                Navigator.pushNamed(context, UserHomePage.route),
+                Toast.show("Logged out Successfully", context,
+                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM),
+              }
           },
-
-
-
           child: Container(
             height: 50,
             child: Row(
