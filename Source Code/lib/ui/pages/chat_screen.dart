@@ -54,12 +54,10 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar:ApplicationBar(),
+      appBar: ApplicationBar(),
       body: SafeArea(
         child: Column(
-
 //          mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -76,7 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
               padding: EdgeInsets.all(10),
               child: Text(
                 'Get immidiate assistance by asking your query in below chat window',
-           //     style: TextStyle(fontSize: 20),
+                //     style: TextStyle(fontSize: 20),
               ),
             ),
             MessageStream(),
@@ -100,6 +98,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': loggedInUser.email,
+                        "time": DateTime.now()
                       });
                     },
                     child: Text(
@@ -121,7 +120,10 @@ class MessageStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: _firestore.collection('messages').snapshots(),
+        stream: _firestore
+            .collection('messages')
+            .orderBy('time', descending: false)
+            .snapshots(),
         // ignore: missing_return
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -136,17 +138,20 @@ class MessageStream extends StatelessWidget {
           for (var message in messages) {
             final messageText = message.data['text'];
             final messageSender = message.data['sender'];
+            final messageTime = message.data["time"] as Timestamp;
             final currentUser = loggedInUser.email;
-            if (currentUser == messageSender) {
-              //msg from logged in user
+            // if (currentUser == messageSender) {
+            //   //msg from logged in user
 
-            }
+            // }
             final messageWidget = MessageBubble(
               sender: messageSender,
               text: messageText,
+              time: messageTime,
               isMe: currentUser == messageSender,
             );
             messageBubbles.add(messageWidget);
+            messageBubbles.sort((a, b) => b.time.compareTo(a.time));
           }
           return Expanded(
             child: ListView(
@@ -160,19 +165,20 @@ class MessageStream extends StatelessWidget {
 }
 
 class MessageBubble extends StatelessWidget {
-  MessageBubble({this.sender, this.text, this.isMe});
-
   final String sender, text;
+  final Timestamp time;
   final bool isMe;
+
+  MessageBubble({this.sender, this.text, this.isMe, this.time});
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment:
-          isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+              isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: <Widget>[
-            Text(sender,
+            Text(' $sender ${time.toDate()}',
                 style: TextStyle(
                   fontSize: 15.0,
                   color: Colors.grey[100],
@@ -180,13 +186,13 @@ class MessageBubble extends StatelessWidget {
             Material(
               borderRadius: isMe
                   ? BorderRadius.only(
-                  topLeft: Radius.circular(30.0),
-                  bottomLeft: Radius.circular(30.0),
-                  bottomRight: Radius.circular(30.0))
+                      topLeft: Radius.circular(30.0),
+                      bottomLeft: Radius.circular(30.0),
+                      bottomRight: Radius.circular(30.0))
                   : BorderRadius.only(
-                  topRight: Radius.circular(30.0),
-                  bottomLeft: Radius.circular(30.0),
-                  bottomRight: Radius.circular(30.0)),
+                      topRight: Radius.circular(30.0),
+                      bottomLeft: Radius.circular(30.0),
+                      bottomRight: Radius.circular(30.0)),
               elevation: 5.0,
               color: isMe ? Colors.grey[500] : Colors.grey[300],
               child: Padding(
