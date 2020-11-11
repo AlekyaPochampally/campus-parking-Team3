@@ -11,6 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:toast/toast.dart';
 import 'package:campusparking/ui/widgets/app_bar.dart';
 import 'package:campusparking/ui/pages/user_home_page.dart';
+import 'package:campusparking/ui/pages/reportPage.dart';
 
 final _firestore = Firestore.instance;
 
@@ -76,282 +77,312 @@ class ViolationPageState extends State<ViolationPage> {
 
   @override
   Widget build(BuildContext context) {
-            return Scaffold(
-                    appBar: ApplicationBar(),
-                    body: Form(
-                      key: _formKey,
-                      child: SafeArea(
-                        child: Padding(
-                          padding: EdgeInsets.all(10),
-                          child: ListView(
-                            children: <Widget>[
-                              Container(
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                  'Report Violation',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 30),
-                                ),
+            return WillPopScope(
+
+              onWillPop: () {
+                moveToLastScreen();
+              },
+                          child: Scaffold(
+                      appBar: AppBar(
+                        title: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                              child: Container(
+                                height: 35.0,
+                                width: 35.0,
+                                child: Image.asset('assets/images/nwm_logo.png')
                               ),
-                              Container(
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                  'Report unauthorized parking here',
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.all(15),
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Enter vehicle number',
+                            ),
+                            Text("Campus Parking"),
+                          ],
+                        ),
+                        leading: IconButton(icon: Icon(
+                          Icons.arrow_back),
+                          onPressed: (){
+                            moveToLastScreen();
+                          }),
+                        ),
+                      
+                      
+                      body: Form(
+                        key: _formKey,
+                        child: SafeArea(
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: ListView(
+                              children: <Widget>[
+                                Container(
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.all(10),
+                                  child: Text(
+                                    'Report Violation',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 30),
                                   ),
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Vehicle number cannot be empty';
-                                    }
-                                    _formKey.currentState.save();
-                                    return null;
-                                  },
-                                  onChanged: (value) =>
-                                      setState(() => vehicle_no = value),
                                 ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.all(15),
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Enter parking lot ID',
+                                Container(
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.all(10),
+                                  child: Text(
+                                    'Report unauthorized parking here',
                                   ),
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Parking lot ID cannot be empty';
-                                    }
-                                    _formKey.currentState.save();
-                                    return null;
-                                  },
-                                  onChanged: (value) =>
-                                      setState(() => parking_lot_id = value),
                                 ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.all(15),
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Enter slot ID',
+                                Container(
+                                  padding: EdgeInsets.all(15),
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Enter vehicle number',
+                                    ),
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Vehicle number cannot be empty';
+                                      }
+                                      _formKey.currentState.save();
+                                      return null;
+                                    },
+                                    onChanged: (value) =>
+                                        setState(() => vehicle_no = value),
                                   ),
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Slot ID cannot be empty';
-                                    }
-                                    _formKey.currentState.save();
-                                    return null;
-                                  },
-                                  onChanged: (value) =>
-                                      setState(() => slot_id = value),
                                 ),
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.all(10),
-                                margin:
-                                    EdgeInsets.fromLTRB(0.0, 0.0, 16.0, 0.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: <Widget>[
-                                    RaisedButton(
-                                      onPressed: () async {
-                                        final selectedDate =
-                                            await _selectDateTime(context);
-                                        if (selectedDate == null) return;
-
-                                        // Formatting the date
-                                        var formatter =
-                                            new DateFormat('yyyy-MMM-dd');
-                                        formatted =
-                                            formatter.format(selectedDate);
-                                        final selectedTime =
-                                            await _selectTime(context);
-
-                                        if (selectedTime == null) return;
-
-                                        // Formatting the time
-                                        final dt = DateTime(
-                                            1969,
-                                            1,
-                                            1,
-                                            selectedTime.hour,
-                                            selectedTime.minute);
-                                        var timerfor = new DateFormat('HH:mm');
-                                        timer = timerfor.format(dt);
-                                        print(timer);
-                                        print(formatted);                          
-
-                                        setState(() {
-                                          this.selectedDate = DateTime(
-                                            selectedDate.year,
-                                            selectedDate.month,
-                                            selectedDate.day,
-                                            selectedTime.hour,
-                                            selectedTime.minute,
-                                          );
-                                        });
-                                      },
-                                      child: Text(
-                                        'Choose Date & Time',
-                                        style: TextStyle(fontSize: 18),
-                                      ),
+                                Container(
+                                  padding: EdgeInsets.all(15),
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Enter parking lot ID',
                                     ),
-                                    Text(
-                                      dateFormat.format(selectedDate),
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                  ],
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Parking lot ID cannot be empty';
+                                      }
+                                      _formKey.currentState.save();
+                                      return null;
+                                    },
+                                    onChanged: (value) =>
+                                        setState(() => parking_lot_id = value),
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin:
-                                    EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
-                                child: Row(
-                                  children: <Widget>[
-                                    Text(
-                                      'Choose Image',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20),
+                                Container(
+                                  padding: EdgeInsets.all(15),
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Enter slot ID',
                                     ),
-                                    IconButton(
-                                      icon: Icon(Icons.photo_camera),
-                                      onPressed: () =>
-                                          _pickImage(ImageSource.camera),
-                                      color: Colors.grey[400],
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.photo_library),
-                                      onPressed: () =>
-                                          _pickImage(ImageSource.gallery),
-                                      color: Colors.grey[400],
-                                    ),
-                                  ],
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Slot ID cannot be empty';
+                                      }
+                                      _formKey.currentState.save();
+                                      return null;
+                                    },
+                                    onChanged: (value) =>
+                                        setState(() => slot_id = value),
+                                  ),
                                 ),
-                              ),
-                              if (_imageFile != null) ...[
-                                Image.file(_imageFile),
-                                Row(
-                                  children: <Widget>[
-                                    FlatButton(
-                                      child: Icon(Icons.crop),
-                                      onPressed: _cropImage,
-                                    ),
-                                    FlatButton(
-                                      child: Icon(Icons.refresh),
-                                      onPressed: _clear,
-                                    ),
-                                  ],
-                                ),
-                                Uploader(file: _imageFile)
-                              ],
-                              Container(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    ButtonTheme(
-                                      minWidth: 150.0,
-                                      height: 45.0,
-                                      child: RaisedButton(
+                                Container(
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.all(10),
+                                  margin:
+                                      EdgeInsets.fromLTRB(0.0, 0.0, 16.0, 0.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: <Widget>[
+                                      RaisedButton(
                                         onPressed: () async {
-                                          if (_formKey.currentState
-                                              .validate()) {
-                                            setState(() => loading = true); 
-                                            print(date);
-                                            print(time);       
-                                            _firestore.collection('Violations').add({
-                                            'Vehicle ID': vehicle_no,
-                                            'ParkingLot ID': parking_lot_id,
-                                            'Slot ID' : slot_id,
-                                            'Time' : timer,
-                                            'Date' : formatted,
-                                             });
-                                              Toast.show("Reported Violation Successful", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+                                          final selectedDate =
+                                              await _selectDateTime(context);
+                                          if (selectedDate == null) return;
+
+                                          // Formatting the date
+                                          var formatter =
+                                              new DateFormat('yyyy-MMM-dd');
+                                          formatted =
+                                              formatter.format(selectedDate);
+                                          final selectedTime =
+                                              await _selectTime(context);
+
+                                          if (selectedTime == null) return;
+
+                                          // Formatting the time
+                                          final dt = DateTime(
+                                              1969,
+                                              1,
+                                              1,
+                                              selectedTime.hour,
+                                              selectedTime.minute);
+                                          var timerfor = new DateFormat('HH:mm');
+                                          timer = timerfor.format(dt);
+                                          print(timer);
+                                          print(formatted);                          
+
+                                          setState(() {
+                                            this.selectedDate = DateTime(
+                                              selectedDate.year,
+                                              selectedDate.month,
+                                              selectedDate.day,
+                                              selectedTime.hour,
+                                              selectedTime.minute,
+                                            );
+                                          });
+                                        },
+                                        child: Text(
+                                          'Choose Date & Time',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ),
+                                      Text(
+                                        dateFormat.format(selectedDate),
+                                        style: TextStyle(fontSize: 15),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin:
+                                      EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Text(
+                                        'Choose Image',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 20),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(Icons.photo_camera),
+                                        onPressed: () =>
+                                            _pickImage(ImageSource.camera),
+                                        color: Colors.grey[400],
+                                      ),
+                                      IconButton(
+                                        icon: Icon(Icons.photo_library),
+                                        onPressed: () =>
+                                            _pickImage(ImageSource.gallery),
+                                        color: Colors.grey[400],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                if (_imageFile != null) ...[
+                                  Image.file(_imageFile),
+                                  Row(
+                                    children: <Widget>[
+                                      FlatButton(
+                                        child: Icon(Icons.crop),
+                                        onPressed: _cropImage,
+                                      ),
+                                      FlatButton(
+                                        child: Icon(Icons.refresh),
+                                        onPressed: _clear,
+                                      ),
+                                    ],
+                                  ),
+                                  Uploader(file: _imageFile)
+                                ],
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      ButtonTheme(
+                                        minWidth: 150.0,
+                                        height: 45.0,
+                                        child: RaisedButton(
+                                          onPressed: () async {
+                                            if (_formKey.currentState
+                                                .validate()) {
+                                              setState(() => loading = true); 
+                                              print(date);
+                                              print(time);       
+                                              _firestore.collection('Violations').add({
+                                              'Vehicle ID': vehicle_no,
+                                              'ParkingLot ID': parking_lot_id,
+                                              'Slot ID' : slot_id,
+                                              'Time' : timer,
+                                              'Date' : formatted,
+                                               });
+                                                Toast.show("Reported Violation Successful", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+                                              Navigator.of(context)
+                                                  .pushReplacementNamed(
+                                                      ViolationPage.route);
+                                            }
+                                          },
+                                          color: Colors.lightBlue,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18.0),
+                                              side:
+                                                  BorderSide(color: Colors.grey)),
+                                          splashColor: Colors.blue,
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.report,
+                                                size: 30.0,
+                                                color: Colors.grey[300],
+                                              ),
+                                              Text(
+                                                'Report',
+                                                style: TextStyle(
+                                                  fontSize: 20.0,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 20.0,
+                                      ),
+                                      ButtonTheme(
+                                        minWidth: 150.0,
+                                        height: 45.0,
+                                        child: RaisedButton(
+                                          onPressed: () {
                                             Navigator.of(context)
                                                 .pushReplacementNamed(
-                                                    ViolationPage.route);
-                                          }
-                                        },
-                                        color: Colors.lightBlue,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                            side:
-                                                BorderSide(color: Colors.grey)),
-                                        splashColor: Colors.blue,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.report,
-                                              size: 30.0,
-                                              color: Colors.grey[300],
-                                            ),
-                                            Text(
-                                              'Report',
-                                              style: TextStyle(
-                                                fontSize: 20.0,
+                                                    UserHomePage.route);
+                                          },
+                                          color: Colors.red,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18.0),
+                                              side:
+                                                  BorderSide(color: Colors.grey)),
+                                          splashColor: Colors.red,
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.clear,
+                                                size: 30.0,
+                                                color: Colors.grey[300],
                                               ),
-                                            ),
-                                          ],
+                                              Text('Clear',
+                                                  style:
+                                                      TextStyle(fontSize: 20.0)),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 20.0,
-                                    ),
-                                    ButtonTheme(
-                                      minWidth: 150.0,
-                                      height: 45.0,
-                                      child: RaisedButton(
-                                        onPressed: () {
-                                          Navigator.of(context)
-                                              .pushReplacementNamed(
-                                                  UserHomePage.route);
-                                        },
-                                        color: Colors.red,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                            side:
-                                                BorderSide(color: Colors.grey)),
-                                        splashColor: Colors.red,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.clear,
-                                              size: 30.0,
-                                              color: Colors.grey[300],
-                                            ),
-                                            Text('Clear',
-                                                style:
-                                                    TextStyle(fontSize: 20.0)),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  );
+            );
   } 
+  void moveToLastScreen() {
+    Navigator.of(context).pushReplacementNamed( reportPage.route);
+  }
 }
 
 
