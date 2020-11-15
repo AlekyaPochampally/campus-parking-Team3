@@ -220,7 +220,7 @@ class _ParkingState extends State<Parking> {
         //print('Available ${UserHomePage.available}');
       }
     }
-  }
+  } //end of check
 
 //code for available number of slots
   void availableSlots() async {
@@ -229,57 +229,56 @@ class _ParkingState extends State<Parking> {
         UserHomePage.Lot_name);
     await for (var snapshot in _firestore.collection('slot').snapshots()) {
       for (var slot in snapshot.documentChanges) {
-
         if (slot.document.documentID.contains(UserHomePage.Lot_name)) {
-<<<<<<< HEAD
-
           if (slot.document.data['Is_Occupied']) {
-           // setState(() {
-           //   UserHomePage.available--;
-              print(slot.document.documentID + "is occupied");
-           // });
+            // setState(() {
+            //   UserHomePage.available--;
+            print(slot.document.documentID + "is occupied");
+            // });
           } else {
             setState(() {
-              if( UserHomePage.available <12) {
+              if (UserHomePage.available < 12) {
                 UserHomePage.available++;
               }
               print(slot.document.documentID + "is vacant");
-           });
-=======
-          print("check parking page");
-          print(slot.document.documentID);
-          print(UserHomePage.Lot_name);
-          //print('got inside 1st if');
-          if (slot.document.data['Is_Occupied']) {
-            setState(() {
-              UserHomePage.available--;
-              print("check parking count occupied: ${UserHomePage.available}");
-              print(slot.document.documentID);
             });
-          } else {
-            setState(() {
-              UserHomePage.available++;
-              print(
-                  "check parking count not occupied: ${UserHomePage.available}");
-              // print(slot.document.documentID);
-            });
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
+
+            print("check parking page");
+            print(slot.document.documentID);
+            print(UserHomePage.Lot_name);
+            //print('got inside 1st if');
+            if (slot.document.data['Is_Occupied']) {
+              setState(() {
+                UserHomePage.available--;
+                print(
+                    "check parking count occupied: ${UserHomePage.available}");
+                print(slot.document.documentID);
+              });
+            } else {
+              setState(() {
+                UserHomePage.available++;
+                print(
+                    "check parking count not occupied: ${UserHomePage
+                        .available}");
+                // print(slot.document.documentID);
+              });
+            }
           }
+          print('Available ${UserHomePage.available}');
         }
-        print('Available ${UserHomePage.available}');
-      }
-      if (UserHomePage.Lot_name.contains("PA1")) {
-        print("In PA1 ${UserHomePage.available}");
-        UserHomePage.parkingLot1 = UserHomePage.available;
-      } else if (UserHomePage.Lot_name.contains("PA2")) {
-        print("In PA2 ${UserHomePage.available}");
-        UserHomePage.parkingLot2 = UserHomePage.available;
-      } else if (UserHomePage.Lot_name.contains("PA3")) {
-        print("In PA3 ${UserHomePage.available}");
-        UserHomePage.parkingLot3 = UserHomePage.available;
-      } else if (UserHomePage.Lot_name.contains("PA4")) {
-        print("In PA4 ${UserHomePage.available}");
-        UserHomePage.parkingLot4 = UserHomePage.available;
+        if (UserHomePage.Lot_name.contains("PA1")) {
+          print("In PA1 ${UserHomePage.available}");
+          UserHomePage.parkingLot1 = UserHomePage.available;
+        } else if (UserHomePage.Lot_name.contains("PA2")) {
+          print("In PA2 ${UserHomePage.available}");
+          UserHomePage.parkingLot2 = UserHomePage.available;
+        } else if (UserHomePage.Lot_name.contains("PA3")) {
+          print("In PA3 ${UserHomePage.available}");
+          UserHomePage.parkingLot3 = UserHomePage.available;
+        } else if (UserHomePage.Lot_name.contains("PA4")) {
+          print("In PA4 ${UserHomePage.available}");
+          UserHomePage.parkingLot4 = UserHomePage.available;
+        }
       }
     }
   }
@@ -533,12 +532,9 @@ class _ParkingState extends State<Parking> {
       // if (data['User_ID'] == loggedInUser.email)
       //   {
       if (!data['Is_Occupied']) {
-<<<<<<< HEAD
-        occupySlot(buttonText);
-=======
-        occupySlot();
 
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
+        occupySlot(buttonText);
+
         break;
       } else {
         if (data['User_ID'] == loggedInUser.email) {
@@ -586,23 +582,9 @@ class _ParkingState extends State<Parking> {
       ),
     );
   }
-<<<<<<< HEAD
-=======
 
-  bool _hasBeenPressed = false;
-  bool _hasBeenPressed1 = false;
-  bool _hasBeenPressed2 = false;
-  bool _hasBeenPressed3 = false;
-  bool _hasBeenPressed4 = false;
-  bool _hasBeenPressed5 = false;
-  bool _hasBeenPressed6 = false;
-  bool _hasBeenPressed7 = false;
-  bool _hasBeenPressed8 = false;
-  bool _hasBeenPressed9 = false;
-  bool _hasBeenPressed10 = false;
-  bool _hasBeenPressed11 = false;
-  bool _hasBeenPressed12 = false;
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -716,14 +698,7 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("1"),
-<<<<<<< HEAD
 
-=======
-                                        setState(() {
-                                          _hasBeenPressed1 = !_hasBeenPressed1;
-                                        })
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
-                                        // }),
                                       },
                                   child: Text(
                                     "1",
@@ -754,14 +729,7 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("2"),
-<<<<<<< HEAD
 
-=======
-                                        setState(() {
-                                          _hasBeenPressed2 = !_hasBeenPressed2;
-                                        })
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
-                                        // }),
                                       },
                                   child: Text(
                                     "2",
@@ -792,14 +760,7 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("3"),
-<<<<<<< HEAD
 
-=======
-                                        setState(() {
-                                          _hasBeenPressed3 = !_hasBeenPressed3;
-                                        })
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
-                                        // }),
                                       },
                                   child: Text(
                                     "3",
@@ -830,14 +791,7 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("4"),
-<<<<<<< HEAD
 
-=======
-                                        setState(() {
-                                          _hasBeenPressed4 = !_hasBeenPressed4;
-                                        })
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
-                                        // }),
                                       },
                                   child: Text(
                                     "4",
@@ -870,13 +824,7 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("5"),
-<<<<<<< HEAD
 
-=======
-                                        setState(() {
-                                          _hasBeenPressed5 = !_hasBeenPressed5;
-                                        })
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
                                         // }),
                                       },
                                   child: Text(
@@ -908,14 +856,7 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("6"),
-<<<<<<< HEAD
 
-=======
-                                        setState(() {
-                                          _hasBeenPressed6 = !_hasBeenPressed6;
-                                        })
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
-                                        // }),
                                       },
                                   child: Text(
                                     "6",
@@ -946,14 +887,7 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("7"),
-<<<<<<< HEAD
 
-=======
-                                        setState(() {
-                                          _hasBeenPressed7 = !_hasBeenPressed7;
-                                        })
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
-                                        // }),
                                       },
                                   child: Text(
                                     "7",
@@ -984,14 +918,7 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("8"),
-<<<<<<< HEAD
 
-=======
-                                        setState(() {
-                                          _hasBeenPressed8 = !_hasBeenPressed8;
-                                        })
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
-                                        // }),
                                       },
                                   child: Text(
                                     "8",
@@ -1024,14 +951,7 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("9"),
-<<<<<<< HEAD
 
-=======
-                                        setState(() {
-                                          _hasBeenPressed9 = !_hasBeenPressed9;
-                                        })
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
-                                        // }),
                                       },
                                   child: Text(
                                     "9",
@@ -1060,19 +980,11 @@ class _ParkingState extends State<Parking> {
                                     reserveSlot("10");
                                   },
                                   onPressed: () => {
-<<<<<<< HEAD
+
 
                                         buttonPressed("10"),
 
-=======
-                                        //  setState(() {
-                                        buttonPressed("10"),
-                                        setState(() {
-                                          _hasBeenPressed10 =
-                                              !_hasBeenPressed10;
-                                        })
-                                        // }),
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
+
                                       },
                                   child: Text(
                                     "10",
@@ -1103,15 +1015,7 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("11"),
-<<<<<<< HEAD
 
-=======
-                                        setState(() {
-                                          _hasBeenPressed11 =
-                                              !_hasBeenPressed11;
-                                        })
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
-                                        // }),
                                       },
                                   child: Text(
                                     "11",
@@ -1142,15 +1046,8 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("12"),
-<<<<<<< HEAD
 
-=======
-                                        setState(() {
-                                          _hasBeenPressed12 =
-                                              !_hasBeenPressed12;
-                                        })
->>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
-                                        // }),
+
                                       },
                                   child: Text(
                                     "12",
