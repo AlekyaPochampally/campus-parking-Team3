@@ -231,54 +231,34 @@ class _ParkingState extends State<Parking> {
       for (var slot in snapshot.documentChanges) {
         if (slot.document.documentID.contains(UserHomePage.Lot_name)) {
           if (slot.document.data['Is_Occupied']) {
-            // setState(() {
-            //   UserHomePage.available--;
+
             print(slot.document.documentID + "is occupied");
-            // });
-          } else {
+
+          }
+          else {
             setState(() {
               if (UserHomePage.available < 12) {
                 UserHomePage.available++;
               }
-              print(slot.document.documentID + "is vacant");
+              print(slot.document.documentID + " is vacant");
             });
 
-            print("check parking page");
-            print(slot.document.documentID);
-            print(UserHomePage.Lot_name);
-            //print('got inside 1st if');
-            if (slot.document.data['Is_Occupied']) {
-              setState(() {
-                UserHomePage.available--;
-                print(
-                    "check parking count occupied: ${UserHomePage.available}");
-                print(slot.document.documentID);
-              });
-            } else {
-              setState(() {
-                UserHomePage.available++;
-                print(
-                    "check parking count not occupied: ${UserHomePage
-                        .available}");
-                // print(slot.document.documentID);
-              });
-            }
           }
           print('Available ${UserHomePage.available}');
         }
-        if (UserHomePage.Lot_name.contains("PA1")) {
-          print("In PA1 ${UserHomePage.available}");
-          UserHomePage.parkingLot1 = UserHomePage.available;
-        } else if (UserHomePage.Lot_name.contains("PA2")) {
-          print("In PA2 ${UserHomePage.available}");
-          UserHomePage.parkingLot2 = UserHomePage.available;
-        } else if (UserHomePage.Lot_name.contains("PA3")) {
-          print("In PA3 ${UserHomePage.available}");
-          UserHomePage.parkingLot3 = UserHomePage.available;
-        } else if (UserHomePage.Lot_name.contains("PA4")) {
-          print("In PA4 ${UserHomePage.available}");
-          UserHomePage.parkingLot4 = UserHomePage.available;
-        }
+        // if (UserHomePage.Lot_name.contains("PA1")) {
+        //
+        //   UserHomePage.parkingLot1 = UserHomePage.available;
+        // } else if (UserHomePage.Lot_name.contains("PA2")) {
+        //
+        //   UserHomePage.parkingLot2 = UserHomePage.available;
+        // } else if (UserHomePage.Lot_name.contains("PA3")) {
+        //
+        //   UserHomePage.parkingLot3 = UserHomePage.available;
+        // } else if (UserHomePage.Lot_name.contains("PA4")) {
+        //
+        //   UserHomePage.parkingLot4 = UserHomePage.available;
+        // }
       }
     }
   }
