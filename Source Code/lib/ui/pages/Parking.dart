@@ -25,6 +25,19 @@ class _ParkingState extends State<Parking> {
   bool Is_Occupied, Slot_Type, changeColor = false, changeColor1 = false;
   String User_ID, document_id, Lot_Name;
   int Lot_ID, Slot_ID;
+  bool _hasBeenPressed = false;
+  bool _hasBeenPressed1 = false;
+  bool _hasBeenPressed2 = false;
+  bool _hasBeenPressed3 = false;
+  bool _hasBeenPressed4 = false;
+  bool _hasBeenPressed5 = false;
+  bool _hasBeenPressed6 = false;
+  bool _hasBeenPressed7 = false;
+  bool _hasBeenPressed8 = false;
+  bool _hasBeenPressed9 = false;
+  bool _hasBeenPressed10 = false;
+  bool _hasBeenPressed11 = false;
+  bool _hasBeenPressed12 = false;
 
   @override
   void initState() {
@@ -33,16 +46,206 @@ class _ParkingState extends State<Parking> {
     UserHomePage.available = 0;
     Lot_Name = UserHomePage.Lot_name.substring(2);
     availableSlots();
+    checkColor();
+  }
+
+  void checkColor() async {
+    await for (var snapshot in _firestore.collection('slot').snapshots()) {
+      for (var slot in snapshot.documentChanges) {
+        print("Inside CheckColor: ");
+        if (slot.document.documentID.contains(UserHomePage.Lot_name)) {
+          print("Document ID " + slot.document.documentID);
+          if (slot.document.data['Is_Occupied']) {
+            print("This says the slot is occupied");
+            if (slot.document.documentID.contains("10")) {
+              print("setting has_been_pressed10 to true");
+              setState(() {
+                _hasBeenPressed10 = true;
+              });
+            }
+            else if (slot.document.documentID.contains("11")) {
+              print("setting has_been_pressed11 to true");
+              setState(() {
+                _hasBeenPressed11 = true;
+              });
+            }
+            else if (slot.document.documentID.contains("12")) {
+              print("setting has_been_pressed12 to true");
+              setState(() {
+                _hasBeenPressed12 = true;
+              });
+            }
+            else if (slot.document.documentID.contains("1")) {
+              print("setting has_been_pressed1 to true");
+              setState(() {
+                _hasBeenPressed1 = true;
+              });
+            }
+            else if (slot.document.documentID.contains("2")) {
+              print("setting _hasBeenPressed2 to true");
+              setState(() {
+                _hasBeenPressed2 = true;
+              });
+            }
+            else if (slot.document.documentID.contains("3")) {
+              print("setting _hasBeenPressed3 to true");
+              setState(() {
+                _hasBeenPressed3 = true;
+              });
+            }
+            else if (slot.document.documentID.contains("4")) {
+              print("setting _hasBeenPressed4 to true");
+              setState(() {
+                _hasBeenPressed4 = true;
+              });
+            }
+            else if (slot.document.documentID.contains("5")) {
+              print("setting _hasBeenPressed5 to true");
+              setState(() {
+                _hasBeenPressed5 = true;
+              });
+            }
+            else if (slot.document.documentID.contains("6")) {
+              print("setting _hasBeenPressed6 to true");
+              setState(() {
+                _hasBeenPressed6 = true;
+              });
+            }
+            else if (slot.document.documentID.contains("7")) {
+              print("setting _hasBeenPressed7 to true");
+              setState(() {
+                _hasBeenPressed7 = true;
+              });
+            }
+            else if (slot.document.documentID.contains("8")) {
+              print("setting   _hasBeenPressed8 to true");
+              setState(() {
+                _hasBeenPressed8 = true;
+              });
+            }
+            else if (slot.document.documentID.contains("9")) {
+              print("setting _hasBeenPressed9 to true");
+              setState(() {
+                _hasBeenPressed9 = true;
+              });
+            }
+           // no need of else
+              else{
+                print(" i am in else");
+            }
+
+
+
+          }
+          else{
+
+              print("This says the slot is vacant");
+              if (slot.document.documentID.contains("10")) {
+                print("setting has_been_pressed10 to false");
+                setState(() {
+                  _hasBeenPressed10 = false;
+                });
+              }
+              else if (slot.document.documentID.contains("11")) {
+                print("setting has_been_pressed11 to false");
+                setState(() {
+                  _hasBeenPressed11 = false;
+                });
+              }
+              else if (slot.document.documentID.contains("12")) {
+                print("setting has_been_pressed12 to false");
+                setState(() {
+                  _hasBeenPressed12 = false;
+                });
+              }else if (slot.document.documentID.contains("1")) {
+                print("setting has_been_pressed1 to false");
+                setState(() {
+                  _hasBeenPressed1 = false;
+                });
+              }
+              else if (slot.document.documentID.contains("2")) {
+                print("setting _hasBeenPressed2 to false");
+                setState(() {
+                  _hasBeenPressed2 = false;
+                });
+              }else if (slot.document.documentID.contains("3")) {
+                print("setting _hasBeenPressed3 to false");
+                setState(() {
+                  _hasBeenPressed3 = false;
+                });
+              }
+              else if (slot.document.documentID.contains("4")) {
+                print("setting _hasBeenPressed4 to false");
+                setState(() {
+                  _hasBeenPressed4 = false;
+                });
+              }
+              else if (slot.document.documentID.contains("5")) {
+                print("setting _hasBeenPressed5 to false");
+                setState(() {
+                  _hasBeenPressed5 = false;
+                });
+              }
+              else if (slot.document.documentID.contains("6")) {
+                print("setting _hasBeenPressed6 to false");
+                setState(() {
+                  _hasBeenPressed6 = false;
+                });
+              }
+              else if (slot.document.documentID.contains("7")) {
+                print("setting _hasBeenPressed7 to false");
+                setState(() {
+                  _hasBeenPressed7 = false;
+                });
+              }
+              else if (slot.document.documentID.contains("8")) {
+                print("setting   _hasBeenPressed8 to false");
+                setState(() {
+                  _hasBeenPressed8 = false;
+                });
+              }
+              else if (slot.document.documentID.contains("9")) {
+                print("setting _hasBeenPressed9 to false");
+                setState(() {
+                  _hasBeenPressed9 = false;
+                });
+              }
+              // no need of else
+              else{
+                print(" i am in else");
+              }
+
+          }
+        }
+        //print('Available ${UserHomePage.available}');
+      }
+    }
   }
 
 //code for available number of slots
   void availableSlots() async {
     print('this is available slot function');
-    print(UserHomePage.Lot_name);
+    print("checking for available number of slots in parking area " +
+        UserHomePage.Lot_name);
     await for (var snapshot in _firestore.collection('slot').snapshots()) {
       for (var slot in snapshot.documentChanges) {
-        //print('got inside for');
+
         if (slot.document.documentID.contains(UserHomePage.Lot_name)) {
+<<<<<<< HEAD
+
+          if (slot.document.data['Is_Occupied']) {
+           // setState(() {
+           //   UserHomePage.available--;
+              print(slot.document.documentID + "is occupied");
+           // });
+          } else {
+            setState(() {
+              if( UserHomePage.available <12) {
+                UserHomePage.available++;
+              }
+              print(slot.document.documentID + "is vacant");
+           });
+=======
           print("check parking page");
           print(slot.document.documentID);
           print(UserHomePage.Lot_name);
@@ -60,9 +263,10 @@ class _ParkingState extends State<Parking> {
                   "check parking count not occupied: ${UserHomePage.available}");
               // print(slot.document.documentID);
             });
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
           }
         }
-        //print('Available ${UserHomePage.available}');
+        print('Available ${UserHomePage.available}');
       }
       if (UserHomePage.Lot_name.contains("PA1")) {
         print("In PA1 ${UserHomePage.available}");
@@ -81,31 +285,211 @@ class _ParkingState extends State<Parking> {
   }
 
 //code for occupying a slot
-  void occupySlot() {
+  void occupySlot(String buttonText) {
     var occupied =
         _firestore.collection('slot').document(document_id).updateData({
       'Is_Occupied': true,
       'User_ID': User_ID,
     });
-    setState(() {
-      changeColor1 = true;
-    });
+    if (buttonText.contains("10")) {
+      print("setting has_been_pressed10 to true inside occupy slot ");
+      setState(() {
+        _hasBeenPressed10 = true;
+        UserHomePage.available--;
+        print("Slot is occupied: inside occupy slot");
+      });
+    }
+    else if (buttonText.contains("11")) {
+      print("setting _hasBeenPressed11 to true inside occupy slot ");
+      setState(() {
+        _hasBeenPressed11 = true;
+        UserHomePage.available--;
+        print("Slot is occupied: inside occupy slot");
+      });
+    }
+    else if (buttonText.contains("12")) {
+      print("setting has_been_pressed12 to true inside occupy slot ");
+      setState(() {
+        _hasBeenPressed12 = true;
+        UserHomePage.available--;
+        print("Slot is occupied: inside occupy slot");
+      });
+    }
+    else if (buttonText.contains("1")) {
+      print("setting has_been_pressed1 to true inside occupy slot ");
+      setState(() {
+        _hasBeenPressed1 = true;
+        UserHomePage.available--;
+        print("Slot is occupied: inside occupy slot");
+      });
+    }
+    else if (buttonText.contains("2")) {
+      print("setting has_been_pressed2 to true inside occupy slot ");
+      setState(() {
+        _hasBeenPressed2 = true;
+        UserHomePage.available--;
+        print("Slot is occupied: inside occupy slot");
+      });
+    }    else if (buttonText.contains("3")) {
+      print("setting has_been_pressed3 to true inside occupy slot ");
+      setState(() {
+        _hasBeenPressed3 = true;
+        UserHomePage.available--;
+        print("Slot is occupied: inside occupy slot");
+      });
+    }    else if (buttonText.contains("4")) {
+      print("setting has_been_pressed4 to true inside occupy slot ");
+      setState(() {
+        _hasBeenPressed4=true;
+        UserHomePage.available--;
+        print("Slot is occupied: inside occupy slot");
+      });
+    }    else if (buttonText.contains("5")) {
+      print("setting has_been_pressed5 to true inside occupy slot ");
+      setState(() {
+        _hasBeenPressed5 = true;
+        UserHomePage.available--;
+        print("Slot is occupied: inside occupy slot");
+      });
+    }    else if (buttonText.contains("6")) {
+      print("setting has_been_pressed6 to true inside occupy slot ");
+      setState(() {
+        _hasBeenPressed6 = true;
+        UserHomePage.available--;
+        print("Slot is occupied: inside occupy slot");
+      });
+    }    else if (buttonText.contains("7")) {
+      print("setting has_been_pressed7 to true inside occupy slot ");
+      setState(() {
+        _hasBeenPressed7 = true;
+        UserHomePage.available--;
+        print("Slot is occupied: inside occupy slot");
+      });
+    }    else if (buttonText.contains("8")) {
+      print("setting has_been_pressed8 to true inside occupy slot ");
+      setState(() {
+        _hasBeenPressed8 = true;
+        UserHomePage.available--;
+        print("Slot is occupied: inside occupy slot");
+      });
+    }    else if (buttonText.contains("9")) {
+      print("setting has_been_pressed9 to true inside occupy slot ");
+      setState(() {
+        _hasBeenPressed9 = true;
+        UserHomePage.available--;
+        print("Slot is occupied: inside occupy slot");
+      });
+    }
+
+    else{
+      print("i am inside else");
+    }
 
     print('requested slot occupied successfully');
-    Toast.show("You have Ocuupied the slot", context,
+    Toast.show("You have Occupied the slot", context,
         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
   }
 
   //code for vacating a slot
-  void vacateSlot() {
+  void vacateSlot(String buttonText) {
     var occupied =
         _firestore.collection('slot').document(document_id).updateData({
       'Is_Occupied': false,
       'User_ID': User_ID,
     });
-    setState(() {
-      changeColor1 = false;
-    });
+
+    if (buttonText.contains("10")) {
+      print("setting has_been_pressed10 to false inside vacant slot ");
+      setState(() {
+        _hasBeenPressed10 = false;
+      });
+    }
+    else if (buttonText.contains("11")) {
+      print("setting _hasBeenPressed11 to false inside vacant slot ");
+      setState(() {
+        _hasBeenPressed11 = false;
+
+        print("Slot is vacated: inside vacate slot");
+      });
+    }
+    else if (buttonText.contains("12")) {
+      print("setting has_been_pressed12 to false inside vacant slot ");
+      setState(() {
+        _hasBeenPressed12 = false;
+
+        print("Slot is vacated: inside vacate slot");
+      });
+    }
+    else if (buttonText.contains("1")) {
+      print("setting has_been_pressed1 to false inside vacant slot ");
+      setState(() {
+        _hasBeenPressed1 = false;
+
+        print("Slot is vacated: inside vacate slot");
+      });
+    }
+    else if (buttonText.contains("2")) {
+      print("setting has_been_pressed2 to false inside vacant slot ");
+      setState(() {
+        _hasBeenPressed2 = false;
+
+        print("Slot is vacated: inside vacate slot");
+      });
+    }    else if (buttonText.contains("3")) {
+      print("setting has_been_pressed3 to false inside vacant slot ");
+      setState(() {
+        _hasBeenPressed3 = false;
+
+        print("Slot is vacated: inside vacate slot");
+      });
+    }    else if (buttonText.contains("4")) {
+      print("setting has_been_pressed4 to false inside vacant slot ");
+      setState(() {
+        _hasBeenPressed4=false;
+
+        print("Slot is vacated: inside vacate slot");
+      });
+    }    else if (buttonText.contains("5")) {
+      print("setting has_been_pressed5 to false inside vacant slot ");
+      setState(() {
+        _hasBeenPressed5 = false;
+
+        print("Slot is vacated: inside vacate slot");
+      });
+    }    else if (buttonText.contains("6")) {
+      print("setting has_been_pressed6 to false inside vacant slot ");
+      setState(() {
+        _hasBeenPressed6 = false;
+
+        print("Slot is vacated: inside vacate slot");
+      });
+    }    else if (buttonText.contains("7")) {
+      print("setting has_been_pressed7 to false inside vacant slot ");
+      setState(() {
+        _hasBeenPressed7 = false;
+
+        print("Slot is vacated: inside vacate slot");
+      });
+    }    else if (buttonText.contains("8")) {
+      print("setting has_been_pressed8 to false inside vacant slot ");
+      setState(() {
+        _hasBeenPressed8 = false;
+
+        print("Slot is vacated: inside vacate slot");
+      });
+    }    else if (buttonText.contains("9")) {
+      print("setting has_been_pressed9 to false inside vacant slot ");
+      setState(() {
+        _hasBeenPressed9 = false;
+
+        print("Slot is vacated: inside vacate slot");
+      });
+    }
+
+    else{
+      print("i am inside else");
+    }
+
     Toast.show("You have Vacated the slot", context,
         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     print('requested slot vacated successfully');
@@ -139,9 +523,6 @@ class _ParkingState extends State<Parking> {
     }
   }
 
-  // chaging button color
-  void changeButtonColor() async {}
-
 //checking whether slot is vacant or occupied
   Future buttonPressed(String buttonText) async {
     document_id = UserHomePage.Lot_name + '-' + buttonText;
@@ -152,12 +533,16 @@ class _ParkingState extends State<Parking> {
       // if (data['User_ID'] == loggedInUser.email)
       //   {
       if (!data['Is_Occupied']) {
+<<<<<<< HEAD
+        occupySlot(buttonText);
+=======
         occupySlot();
 
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
         break;
       } else {
         if (data['User_ID'] == loggedInUser.email) {
-          vacateSlot();
+          vacateSlot(buttonText);
           break;
         } else {
           print("This user is not allowed to perform the action " +
@@ -201,6 +586,8 @@ class _ParkingState extends State<Parking> {
       ),
     );
   }
+<<<<<<< HEAD
+=======
 
   bool _hasBeenPressed = false;
   bool _hasBeenPressed1 = false;
@@ -215,6 +602,7 @@ class _ParkingState extends State<Parking> {
   bool _hasBeenPressed10 = false;
   bool _hasBeenPressed11 = false;
   bool _hasBeenPressed12 = false;
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
 
   @override
   Widget build(BuildContext context) {
@@ -328,9 +716,13 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("1"),
+<<<<<<< HEAD
+
+=======
                                         setState(() {
                                           _hasBeenPressed1 = !_hasBeenPressed1;
                                         })
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
                                         // }),
                                       },
                                   child: Text(
@@ -362,9 +754,13 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("2"),
+<<<<<<< HEAD
+
+=======
                                         setState(() {
                                           _hasBeenPressed2 = !_hasBeenPressed2;
                                         })
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
                                         // }),
                                       },
                                   child: Text(
@@ -396,9 +792,13 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("3"),
+<<<<<<< HEAD
+
+=======
                                         setState(() {
                                           _hasBeenPressed3 = !_hasBeenPressed3;
                                         })
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
                                         // }),
                                       },
                                   child: Text(
@@ -430,9 +830,13 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("4"),
+<<<<<<< HEAD
+
+=======
                                         setState(() {
                                           _hasBeenPressed4 = !_hasBeenPressed4;
                                         })
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
                                         // }),
                                       },
                                   child: Text(
@@ -466,9 +870,13 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("5"),
+<<<<<<< HEAD
+
+=======
                                         setState(() {
                                           _hasBeenPressed5 = !_hasBeenPressed5;
                                         })
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
                                         // }),
                                       },
                                   child: Text(
@@ -500,9 +908,13 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("6"),
+<<<<<<< HEAD
+
+=======
                                         setState(() {
                                           _hasBeenPressed6 = !_hasBeenPressed6;
                                         })
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
                                         // }),
                                       },
                                   child: Text(
@@ -534,9 +946,13 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("7"),
+<<<<<<< HEAD
+
+=======
                                         setState(() {
                                           _hasBeenPressed7 = !_hasBeenPressed7;
                                         })
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
                                         // }),
                                       },
                                   child: Text(
@@ -568,9 +984,13 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("8"),
+<<<<<<< HEAD
+
+=======
                                         setState(() {
                                           _hasBeenPressed8 = !_hasBeenPressed8;
                                         })
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
                                         // }),
                                       },
                                   child: Text(
@@ -604,9 +1024,13 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("9"),
+<<<<<<< HEAD
+
+=======
                                         setState(() {
                                           _hasBeenPressed9 = !_hasBeenPressed9;
                                         })
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
                                         // }),
                                       },
                                   child: Text(
@@ -636,6 +1060,11 @@ class _ParkingState extends State<Parking> {
                                     reserveSlot("10");
                                   },
                                   onPressed: () => {
+<<<<<<< HEAD
+
+                                        buttonPressed("10"),
+
+=======
                                         //  setState(() {
                                         buttonPressed("10"),
                                         setState(() {
@@ -643,6 +1072,7 @@ class _ParkingState extends State<Parking> {
                                               !_hasBeenPressed10;
                                         })
                                         // }),
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
                                       },
                                   child: Text(
                                     "10",
@@ -673,10 +1103,14 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("11"),
+<<<<<<< HEAD
+
+=======
                                         setState(() {
                                           _hasBeenPressed11 =
                                               !_hasBeenPressed11;
                                         })
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
                                         // }),
                                       },
                                   child: Text(
@@ -708,10 +1142,14 @@ class _ParkingState extends State<Parking> {
                                   onPressed: () => {
                                         //  setState(() {
                                         buttonPressed("12"),
+<<<<<<< HEAD
+
+=======
                                         setState(() {
                                           _hasBeenPressed12 =
                                               !_hasBeenPressed12;
                                         })
+>>>>>>> ec0f8f7eba84323412e45279f7809128daa5c461
                                         // }),
                                       },
                                   child: Text(
