@@ -107,6 +107,9 @@ class _FaQPageState extends State<FaQPage> {
 }
 
 class DataSearch extends SearchDelegate<String> {
+  @override
+  ThemeData appBarTheme(BuildContext context) => Theme.of(context);
+  
   final _data = [
     "none",
     "login failed",
