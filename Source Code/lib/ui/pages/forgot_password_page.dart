@@ -109,48 +109,48 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 ),
               ),
 
-              SizedBox(height: 25),
+              // SizedBox(height: 25),
 
-              // Provide Code
-              Form(
+              // // Provide Code
+              // Form(
 
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: TextFormField(
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Code',
-                        ),
-                        // validator: (value) {
-                        //   if (value.isEmpty) {
-                        //     return 'Provide an OTP sent to your email address';
-                        //   }
-                        //   _formKeyVerifyOTP.currentState.save();
-                        //   return null;
-                        // },
-                        onSaved: (value) => _otp = value,
-                      ),
-                    ),
+              //   child: Column(
+              //     children: <Widget>[
+              //       Container(
+              //         padding: EdgeInsets.all(10),
+              //         child: TextFormField(
+              //           keyboardType: TextInputType.number,
+              //           decoration: InputDecoration(
+              //             border: OutlineInputBorder(),
+              //             labelText: 'Code',
+              //           ),
+              //           // validator: (value) {
+              //           //   if (value.isEmpty) {
+              //           //     return 'Provide an OTP sent to your email address';
+              //           //   }
+              //           //   _formKeyVerifyOTP.currentState.save();
+              //           //   return null;
+              //           // },
+              //           onSaved: (value) => _otp = value,
+              //         ),
+              //       ),
 
-                    // Verify Code button
-                    Container(
-                      height: 55,
-                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: RaisedButton(
-                        onPressed: () async {},
+              //       // Verify Code button
+              //       Container(
+              //         height: 55,
+              //         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              //         child: RaisedButton(
+              //           onPressed: () async {},
 
-                        child: Text(
-                          'Verify Code',
-                          style: TextStyle(fontSize: 18),
-                        ), 
-                      ),
-                    ),
-                  ],
-                ),
-              )
+              //           child: Text(
+              //             'Verify Code',
+              //             style: TextStyle(fontSize: 18),
+              //           ), 
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // )
             ],
           ),
         ),
