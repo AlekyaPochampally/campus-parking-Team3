@@ -55,75 +55,77 @@ class _ParkingState extends State<Parking> {
         print("Inside CheckColor: ");
         if (slot.document.documentID.contains(UserHomePage.Lot_name)) {
           print("Document ID " + slot.document.documentID);
+          String slotID=slot.document.documentID.substring(4);
           if (slot.document.data['Is_Occupied']) {
             print("This says the slot is occupied");
-            if (slot.document.documentID.contains("10")) {
+
+            if (slotID=="10") {
               print("setting has_been_pressed10 to true");
               setState(() {
                 _hasBeenPressed10 = true;
               });
             }
-            else if (slot.document.documentID.contains("11")) {
+            else if (slotID=="11") {
               print("setting has_been_pressed11 to true");
               setState(() {
                 _hasBeenPressed11 = true;
               });
             }
-            else if (slot.document.documentID.contains("12")) {
+            else if (slotID=="12") {
               print("setting has_been_pressed12 to true");
               setState(() {
                 _hasBeenPressed12 = true;
               });
             }
-            else if (slot.document.documentID.contains("1")) {
+            else if (slotID=="1") {
               print("setting has_been_pressed1 to true");
               setState(() {
                 _hasBeenPressed1 = true;
               });
             }
-            else if (slot.document.documentID.contains("2")) {
+            else if (slotID =="2") {
               print("setting _hasBeenPressed2 to true");
               setState(() {
                 _hasBeenPressed2 = true;
               });
             }
-            else if (slot.document.documentID.contains("3")) {
+            else if (slotID=="3"){
               print("setting _hasBeenPressed3 to true");
               setState(() {
                 _hasBeenPressed3 = true;
               });
             }
-            else if (slot.document.documentID.contains("4")) {
+            else if (slotID=="4") {
               print("setting _hasBeenPressed4 to true");
               setState(() {
                 _hasBeenPressed4 = true;
               });
             }
-            else if (slot.document.documentID.contains("5")) {
+            else if (slotID=="5") {
               print("setting _hasBeenPressed5 to true");
               setState(() {
                 _hasBeenPressed5 = true;
               });
             }
-            else if (slot.document.documentID.contains("6")) {
+            else if (slotID=="6") {
               print("setting _hasBeenPressed6 to true");
               setState(() {
                 _hasBeenPressed6 = true;
               });
             }
-            else if (slot.document.documentID.contains("7")) {
+            else if (slotID=="7") {
               print("setting _hasBeenPressed7 to true");
               setState(() {
                 _hasBeenPressed7 = true;
               });
             }
-            else if (slot.document.documentID.contains("8")) {
+            else if (slotID=="8") {
               print("setting   _hasBeenPressed8 to true");
               setState(() {
                 _hasBeenPressed8 = true;
               });
             }
-            else if (slot.document.documentID.contains("9")) {
+            else if (slotID=="9") {
               print("setting _hasBeenPressed9 to true");
               setState(() {
                 _hasBeenPressed9 = true;
@@ -139,72 +141,72 @@ class _ParkingState extends State<Parking> {
           }
           else{
 
-              print("This says the slot is vacant");
-              if (slot.document.documentID.contains("10")) {
+              print("This says the slot is vacant: "+slotID);
+              if (slotID=="10") {
                 print("setting has_been_pressed10 to false");
                 setState(() {
                   _hasBeenPressed10 = false;
                 });
               }
-              else if (slot.document.documentID.contains("11")) {
+              else if (slotID=="11") {
                 print("setting has_been_pressed11 to false");
                 setState(() {
                   _hasBeenPressed11 = false;
                 });
               }
-              else if (slot.document.documentID.contains("12")) {
+              else if (slotID=="12") {
                 print("setting has_been_pressed12 to false");
                 setState(() {
                   _hasBeenPressed12 = false;
                 });
-              }else if (slot.document.documentID.contains("1")) {
+              }else if (slotID=="1") {
                 print("setting has_been_pressed1 to false");
                 setState(() {
                   _hasBeenPressed1 = false;
                 });
               }
-              else if (slot.document.documentID.contains("2")) {
+              else if (slotID=="2") {
                 print("setting _hasBeenPressed2 to false");
                 setState(() {
                   _hasBeenPressed2 = false;
                 });
-              }else if (slot.document.documentID.contains("3")) {
+              }else if (slotID=="3") {
                 print("setting _hasBeenPressed3 to false");
                 setState(() {
                   _hasBeenPressed3 = false;
                 });
               }
-              else if (slot.document.documentID.contains("4")) {
+              else if (slotID=="4") {
                 print("setting _hasBeenPressed4 to false");
                 setState(() {
                   _hasBeenPressed4 = false;
                 });
               }
-              else if (slot.document.documentID.contains("5")) {
+              else if (slotID=="5") {
                 print("setting _hasBeenPressed5 to false");
                 setState(() {
                   _hasBeenPressed5 = false;
                 });
               }
-              else if (slot.document.documentID.contains("6")) {
+              else if (slotID=="6") {
                 print("setting _hasBeenPressed6 to false");
                 setState(() {
                   _hasBeenPressed6 = false;
                 });
               }
-              else if (slot.document.documentID.contains("7")) {
+              else if (slotID=="7") {
                 print("setting _hasBeenPressed7 to false");
                 setState(() {
                   _hasBeenPressed7 = false;
                 });
               }
-              else if (slot.document.documentID.contains("8")) {
+              else if (slotID=="8") {
                 print("setting   _hasBeenPressed8 to false");
                 setState(() {
                   _hasBeenPressed8 = false;
                 });
               }
-              else if (slot.document.documentID.contains("9")) {
+              else if (slotID=="9") {
                 print("setting _hasBeenPressed9 to false");
                 setState(() {
                   _hasBeenPressed9 = false;
@@ -270,7 +272,7 @@ class _ParkingState extends State<Parking> {
       'Is_Occupied': true,
       'User_ID': User_ID,
     });
-    if (buttonText.contains("10")) {
+    if (buttonText=="10") {
       print("setting has_been_pressed10 to true inside occupy slot ");
       setState(() {
         _hasBeenPressed10 = true;
@@ -278,7 +280,7 @@ class _ParkingState extends State<Parking> {
         print("Slot is occupied: inside occupy slot");
       });
     }
-    else if (buttonText.contains("11")) {
+    else if (buttonText=="11") {
       print("setting _hasBeenPressed11 to true inside occupy slot ");
       setState(() {
         _hasBeenPressed11 = true;
@@ -286,7 +288,7 @@ class _ParkingState extends State<Parking> {
         print("Slot is occupied: inside occupy slot");
       });
     }
-    else if (buttonText.contains("12")) {
+    else if (buttonText=="12") {
       print("setting has_been_pressed12 to true inside occupy slot ");
       setState(() {
         _hasBeenPressed12 = true;
@@ -294,7 +296,7 @@ class _ParkingState extends State<Parking> {
         print("Slot is occupied: inside occupy slot");
       });
     }
-    else if (buttonText.contains("1")) {
+    else if (buttonText=="1") {
       print("setting has_been_pressed1 to true inside occupy slot ");
       setState(() {
         _hasBeenPressed1 = true;
@@ -302,56 +304,61 @@ class _ParkingState extends State<Parking> {
         print("Slot is occupied: inside occupy slot");
       });
     }
-    else if (buttonText.contains("2")) {
+    else if (buttonText=="2") {
+      print("*********ENTERED 2*******: "+buttonText);
       print("setting has_been_pressed2 to true inside occupy slot ");
       setState(() {
         _hasBeenPressed2 = true;
         UserHomePage.available--;
         print("Slot is occupied: inside occupy slot");
       });
-    }    else if (buttonText.contains("3")) {
+    }    else if (buttonText=="3") {
+      print("*********ENTERED 3*******: "+buttonText);
       print("setting has_been_pressed3 to true inside occupy slot ");
       setState(() {
         _hasBeenPressed3 = true;
         UserHomePage.available--;
         print("Slot is occupied: inside occupy slot");
       });
-    }    else if (buttonText.contains("4")) {
+    }    else if (buttonText=="4") {
+      print("*********ENTERED 4*******: "+buttonText);
       print("setting has_been_pressed4 to true inside occupy slot ");
       setState(() {
         _hasBeenPressed4=true;
         UserHomePage.available--;
         print("Slot is occupied: inside occupy slot");
       });
-    }    else if (buttonText.contains("5")) {
+    }    else if (buttonText=="5") {
+      print("*********ENTERED 5*******: "+buttonText);
       print("setting has_been_pressed5 to true inside occupy slot ");
       setState(() {
         _hasBeenPressed5 = true;
         UserHomePage.available--;
         print("Slot is occupied: inside occupy slot");
       });
-    }    else if (buttonText.contains("6")) {
+    }    else if (buttonText=="6") {
+      print("*********ENTERED 6*******: "+buttonText);
       print("setting has_been_pressed6 to true inside occupy slot ");
       setState(() {
         _hasBeenPressed6 = true;
         UserHomePage.available--;
         print("Slot is occupied: inside occupy slot");
       });
-    }    else if (buttonText.contains("7")) {
+    }    else if (buttonText=="7") {
       print("setting has_been_pressed7 to true inside occupy slot ");
       setState(() {
         _hasBeenPressed7 = true;
         UserHomePage.available--;
         print("Slot is occupied: inside occupy slot");
       });
-    }    else if (buttonText.contains("8")) {
+    }    else if (buttonText=="8") {
       print("setting has_been_pressed8 to true inside occupy slot ");
       setState(() {
         _hasBeenPressed8 = true;
         UserHomePage.available--;
         print("Slot is occupied: inside occupy slot");
       });
-    }    else if (buttonText.contains("9")) {
+    }    else if (buttonText=="9") {
       print("setting has_been_pressed9 to true inside occupy slot ");
       setState(() {
         _hasBeenPressed9 = true;
@@ -377,13 +384,13 @@ class _ParkingState extends State<Parking> {
       'User_ID': User_ID,
     });
 
-    if (buttonText.contains("10")) {
+    if (buttonText=="10") {
       print("setting has_been_pressed10 to false inside vacant slot ");
       setState(() {
         _hasBeenPressed10 = false;
       });
     }
-    else if (buttonText.contains("11")) {
+    else if (buttonText=="11") {
       print("setting _hasBeenPressed11 to false inside vacant slot ");
       setState(() {
         _hasBeenPressed11 = false;
@@ -391,7 +398,7 @@ class _ParkingState extends State<Parking> {
         print("Slot is vacated: inside vacate slot");
       });
     }
-    else if (buttonText.contains("12")) {
+    else if (buttonText=="12") {
       print("setting has_been_pressed12 to false inside vacant slot ");
       setState(() {
         _hasBeenPressed12 = false;
@@ -399,7 +406,7 @@ class _ParkingState extends State<Parking> {
         print("Slot is vacated: inside vacate slot");
       });
     }
-    else if (buttonText.contains("1")) {
+    else if (buttonText=="1") {
       print("setting has_been_pressed1 to false inside vacant slot ");
       setState(() {
         _hasBeenPressed1 = false;
@@ -407,56 +414,56 @@ class _ParkingState extends State<Parking> {
         print("Slot is vacated: inside vacate slot");
       });
     }
-    else if (buttonText.contains("2")) {
+    else if (buttonText=="2") {
       print("setting has_been_pressed2 to false inside vacant slot ");
       setState(() {
         _hasBeenPressed2 = false;
 
         print("Slot is vacated: inside vacate slot");
       });
-    }    else if (buttonText.contains("3")) {
+    }    else if (buttonText=="3") {
       print("setting has_been_pressed3 to false inside vacant slot ");
       setState(() {
         _hasBeenPressed3 = false;
 
         print("Slot is vacated: inside vacate slot");
       });
-    }    else if (buttonText.contains("4")) {
+    }    else if (buttonText=="4") {
       print("setting has_been_pressed4 to false inside vacant slot ");
       setState(() {
         _hasBeenPressed4=false;
 
         print("Slot is vacated: inside vacate slot");
       });
-    }    else if (buttonText.contains("5")) {
+    }    else if (buttonText=="5") {
       print("setting has_been_pressed5 to false inside vacant slot ");
       setState(() {
         _hasBeenPressed5 = false;
 
         print("Slot is vacated: inside vacate slot");
       });
-    }    else if (buttonText.contains("6")) {
+    }    else if (buttonText=="6") {
       print("setting has_been_pressed6 to false inside vacant slot ");
       setState(() {
         _hasBeenPressed6 = false;
 
         print("Slot is vacated: inside vacate slot");
       });
-    }    else if (buttonText.contains("7")) {
+    }    else if (buttonText=="7") {
       print("setting has_been_pressed7 to false inside vacant slot ");
       setState(() {
         _hasBeenPressed7 = false;
 
         print("Slot is vacated: inside vacate slot");
       });
-    }    else if (buttonText.contains("8")) {
+    }    else if (buttonText=="8") {
       print("setting has_been_pressed8 to false inside vacant slot ");
       setState(() {
         _hasBeenPressed8 = false;
 
         print("Slot is vacated: inside vacate slot");
       });
-    }    else if (buttonText.contains("9")) {
+    }    else if (buttonText=="9") {
       print("setting has_been_pressed9 to false inside vacant slot ");
       setState(() {
         _hasBeenPressed9 = false;
